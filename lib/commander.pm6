@@ -6,7 +6,7 @@ also does commander::shellish;
 use tester;
 use actions;
 
-our $script-dir is export = $*HOME.child('.metaterm').child('scripts');
+our $script-dir is export = $*HOME.child('.tmeta').child('scripts');
 
 #| <n> <file> -- append nth shown item to script <file>
 method append($meta) {
