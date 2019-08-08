@@ -9,6 +9,10 @@ Interactive and scriptable terminal console wrapper
 tmeta is a wrapper for tmux that supports
 sending and receiving data to/from tmux panes.
 
+Anything typed into the bottom pane is sent to the top one, but
+lines that start with a backslash are commands for `tmeta`.
+You can type `\help` to see all possible commands.
+
 ## Why
 
 Because you get:
@@ -20,7 +24,6 @@ Because you get:
 - the ability to monitor or capture output
 - other `expect`-like functionality
 - controlled copy-and-paste operations into remote sessions
-- transfer of text files to a remote location
 
 ## Quick start
 
