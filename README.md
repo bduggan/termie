@@ -2,6 +2,8 @@
 
 Interactive and scriptable terminal console wrapper
 
+[![Build Status](https://travis-ci.org/bduggan/tmeta.svg?branch=master)](https://travis-ci.org/bduggan/tmeta)
+
 ![image](https://user-images.githubusercontent.com/58956/62714100-c4e26780-b9b2-11e9-8fe4-43089b721698.png)
 
 ## Description
