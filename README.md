@@ -2,6 +2,8 @@
 
 Interactive and scriptable terminal console wrapper
 
+![image](https://user-images.githubusercontent.com/58956/62714100-c4e26780-b9b2-11e9-8fe4-43089b721698.png)
+
 ## Description
 
 tmeta is a wrapper for tmux that supports
