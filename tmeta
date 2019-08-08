@@ -1,0 +1,119 @@
+#!/usr/bin/env perl6
+
+# metaterm
+#
+# requirements:
+#   fzf, tmux, perl6, Log::Async, Readline
+
+our $VERSION = v0.0.1;
+
+use Log::Async;
+use Readline;
+
+use lib $?FILE.IO.resolve.sibling('lib');
+use actions;
+use commands;
+use tester;
+use tmux;
+
+sub init(Bool :$do-log = True) {
+  set-up-tmux;
+  init-dynvars;
+  load-aliases;
+  init-log if $do-log;
+}
+
+my ($*timeout, $*delay, $*color, $*trace, $*newlines);
+my ($*log, $*log-file, $*rl-history-file, @*history, @*shown);
+my (%*aliases, $*alias-file);
+my ($*pane, $*window);
+my $*buffer = 'none';
+my $*DEBUG = False;
+my %*vars;
+
+sub init-dynvars {
+  $*timeout = 5;
+  $*delay = 0.1;
+  $*color = 'allow';
+  $*trace = 'off';
+  $*newlines = True;
+  my $base = $*HOME.child('.metaterm');
+  .d or .mkdir with $base.IO;
+  $*log-file = $base.child('log');
+  $*rl-history-file = $base.child('log-rl');
+  $*alias-file = $base.child('aliases');
+}
+
+sub init-log {
+  @*history = $*log-file.IO.lines if $*log-file.IO.e;
+  say "Logging to $*log-file";
+  $*log = open :a, $*log-file;
+  $*log.out-buffer = 0;
+}
+
+sub load-aliases {
+  use MONKEY-SEE-NO-EVAL;
+  %*aliases = $*alias-file.slurp.lines.map: -> $l {
+      my @z = $l.split(':',2);
+      @z[0] => EVAL @z[1]
+  } if $*alias-file.IO.e;
+}
+
+my %*SUB-MAIN-OPTS = :named-anywhere;
+
+#| interactive mode
+multi MAIN() {
+  logger.send-to($*ERR, :level( * >= DEBUG));
+  init;
+  my $r = Readline.new;
+  $r.using-history;
+  $r.read-history(~$*rl-history-file);
+  loop {
+    my $str = $r.readline('> ');
+    last without $str;
+    $r.add-history($str);
+    $r.write-history(~$*rl-history-file);
+    last unless defined($str);
+    last if $str eq any( '\\quit', '\\exit' );
+    replace-aliases($str);
+    replace-vars($str);
+    if $str ~~ /^ \\ $<rest>=[.*] $ / {
+      run-meta("$<rest>");
+    } else {
+      sendit($str);
+    }
+  }
+}
+
+#| run a script
+multi MAIN(
+  $script,                    #= Name of a script to run
+  Bool :t($trace)=False,      #= Run in trace mode
+  Bool :d($debug)=False,      #= Run in debug mode
+  Bool :$report=False,        #= Print a test report at the end
+) {
+  if $script && not %*ENV<TMUX> {
+    exit note "to run a script, start tmux first";
+  }
+  if $trace {
+    logger.send-to($*ERR, :level( * >= TRACE));
+  } elsif $debug {
+    logger.send-to($*ERR, :level( * >= DEBUG));
+  } else {
+    logger.send-to($*ERR, :level(* >= ERROR));
+  }
+  init(:!do-log);
+  my $tester = tester.new;
+  run-script($script, :$tester);
+  $tester.complete;
+  $tester.report if $report
+}
+
+#| show the version
+multi MAIN(
+  Bool :v($version) is required    #= Display the version and exit
+) {
+  say $VERSION;
+}
+
+

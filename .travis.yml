@@ -1,0 +1,10 @@
+language: perl6
+perl6:
+  - latest
+install:
+  - rakudobrew build zef
+  - zef install Log::Async
+  - zef install Readline
+script:
+  - make test
+sudo: false
