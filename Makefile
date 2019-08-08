@@ -1,2 +1,2 @@
 test:
-	prove -e ./tmeta t/tm/*.tm
+	tmux new 'prove -e ./tmeta t/tm/*.tm'
