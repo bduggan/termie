@@ -6,5 +6,5 @@ install:
   - zef install Log::Async
   - zef install Readline
 script:
-  - make test
+  - ./run-tests
 sudo: false

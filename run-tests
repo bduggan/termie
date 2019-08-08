@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo | tmux -C new > /dev/null
+rm -f /tmp/test.log
+tmux send-keys 'make test > /tmp/test.log && exit'
+tmux send-keys enter
+sleep 1
+( tail -f /tmp/test.log & ) | grep -q Result
+cat /tmp/test.log
+tmux send-keys exit
+tmux send-keys enter
