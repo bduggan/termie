@@ -77,7 +77,7 @@ terminal sessions, whatever
   > \await 02
   ```
 
-  Search the command history for the last occurrence of 'User.find' using fzf
+  Search the command history for the last occurrence of 'User' using fzf
   ```
   > \find User
   ```
