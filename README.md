@@ -63,6 +63,10 @@ console, interactive ruby shell, the python debugger, the
 jupyter console, psql, mysql, regular ssh sessions, local
 terminal sessions, whatever
 
+## More documentation
+
+Please see the [documentation](docs.md) for a complete list of commands.
+
 ## Examples
 
   Show a list of commands.

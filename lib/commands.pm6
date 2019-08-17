@@ -11,6 +11,29 @@ sub arg($cmd) {
   return $cmd.subst($wd,'').trim;
 }
 
+sub generate-help($for = Nil) is export {
+  my @help;
+  for $=pod<>.sort -> $str {
+    next if $for && $str !~~ / $for /;
+    my ($cmd,$desc) = "$str".split('--');
+    next unless $desc;
+    @help.push: sprintf "     \\%-30s %s",$cmd.trim,$desc.trim;
+  }
+  for commander.^methods -> $m {
+    next unless $m.name ~~ /^ <[a..z]>/;
+    next if $for && $m.name !~~ / $for /;
+    next note "No docs for {$m.name}" unless $m.WHY;
+    my $desc = $m.WHY.Str.trim;
+    my $args = '';
+    if $desc ~~ /^ $<args>=[.*] '--' $<desc>=[.*] $/ {
+      $args = " {$<args>.trim}";
+      $desc = $<desc>.trim;
+    }
+    @help.push: sprintf "     \\%-30s %s",$m.name.trim ~ $args,$desc;
+  }
+  @help;
+}
+
 my %repeating;
 sub run-meta($meta) is export {
   return unless $meta.words[0];
@@ -219,9 +242,9 @@ sub run-meta($meta) is export {
       shell 'tput clear';
     }
     when 'alias' {
-      { #=( alias <key> -- show alias ) }
-      { #=( alias <key> <n> -- set key to item n from history (see \last) ) }
-      { #=( alias <key> <cmd> -- set key to <cmd> ) }
+      { #=( alias <key> -- show any alias associated with <key> ) }
+      { #=( alias <key> <n> -- set <key> to item n from history (see \last) ) }
+      { #=( alias <key> <str> -- alias <key> to <str> ) }
       my $key = $meta.words[1];
       my $id = $meta.words[2] or return note 'no alias given, use aliases to see all';
       unless $id {
@@ -247,25 +270,7 @@ sub run-meta($meta) is export {
     when 'help'|'h' {
       #= help -- this help
       my $for = $meta.words[1];
-      my @help;
-      for $=pod<>.sort -> $str {
-        next if $for && $str !~~ / $for /;
-        my ($cmd,$desc) = "$str".split('--');
-        next unless $desc;
-        @help.push: sprintf "     \\%-20s %s",$cmd.trim,$desc.trim;
-      }
-      for commander.^methods -> $m {
-        next unless $m.name ~~ /^ <[a..z]>/;
-        next if $for && $m.name !~~ / $for /;
-        next note "No docs for {$m.name}" unless $m.WHY;
-        my $desc = $m.WHY.Str.trim;
-        my $args = '';
-        if $desc ~~ /^ $<args>=[.*] '--' $<desc>=[.*] $/ {
-          $args = " {$<args>.trim}";
-          $desc = $<desc>.trim;
-        }
-        @help.push: sprintf "     \\%-20s %s",$m.name.trim ~ $args,$desc;
-      }
+      my @help = generate-help($for);
       my ($rows,$cols) = qx{stty size}.split(' ');
       shell 'tput clear';
       for @help.grep({ .words[0] ne '\\script' } ).sort -> $l {

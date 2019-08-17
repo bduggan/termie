@@ -1,0 +1,33 @@
+#!/usr/bin/env perl6
+
+use lib 'lib';
+use commands;
+
+my @help = generate-help();
+
+my %c = @help.classify: { $^line ~~ / ^^ \s* '\script '/ ?? 'script' !! 'interactive' };
+
+say "## Currently supported commands";
+say "";
+
+say "### Interactive";
+say "";
+say "In interactive mode these commands are supported:";
+say "";
+say '```';
+say %c<interactive>.sort.join("\n");
+say '```';
+
+say "### Scripts";
+say "";
+say "In scripting mode, these additional commands are supported:";
+say "";
+say '```';
+say %c<script>.map({S/script \s* //}).sort.join("\n");
+say '```';
+
+say "";
+say "---";
+say "";
+say "For more verbose descriptions of these commands, please refer to the source code!";
+
