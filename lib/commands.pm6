@@ -17,7 +17,7 @@ sub generate-help($for = Nil) is export {
     next if $for && $str !~~ / $for /;
     my ($cmd,$desc) = "$str".split('--');
     next unless $desc;
-    @help.push: sprintf "     \\%-30s %s",$cmd.trim,$desc.trim;
+    @help.push: { text => sprintf "     \\%-30s %s",$cmd.trim,$desc.trim }
   }
   for commander.^methods -> $m {
     next unless $m.name ~~ /^ <[a..z]>/;
@@ -29,7 +29,7 @@ sub generate-help($for = Nil) is export {
       $args = " {$<args>.trim}";
       $desc = $<desc>.trim;
     }
-    @help.push: sprintf "     \\%-30s %s",$m.name.trim ~ $args,$desc;
+    @help.push: { text => sprintf "     \\%-30s %s",$m.name.trim ~ $args,$desc }
   }
   @help;
 }
@@ -270,7 +270,7 @@ sub run-meta($meta) is export {
     when 'help'|'h' {
       #= help -- this help
       my $for = $meta.words[1];
-      my @help = generate-help($for);
+      my @help = generate-help($for).map({.<text>});
       my ($rows,$cols) = qx{stty size}.split(' ');
       shell 'tput clear';
       for @help.grep({ .words[0] ne '\\script' } ).sort -> $l {

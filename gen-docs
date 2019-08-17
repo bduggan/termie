@@ -3,7 +3,7 @@
 use lib 'lib';
 use commands;
 
-my @help = generate-help();
+my @help = generate-help().map({.<text>});
 
 my %c = @help.classify: { $^line ~~ / ^^ \s* '\script '/ ?? 'script' !! 'interactive' };
 
