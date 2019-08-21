@@ -1,6 +1,6 @@
 ## Currently supported commands
 
-### Interactive
+## Interactive
 
 In interactive mode these commands are supported:
 
@@ -24,6 +24,7 @@ In interactive mode these commands are supported:
      \even                           split layout vertically evenly
      \find <phrase>                  Find commands in the history.
      \grep                           grep for a phrase in the output
+     \greplines [num]                set between lines for \grep
      \help                           this help
      \info                           set log level to info
      \ls <opts>                      run ls in this pane

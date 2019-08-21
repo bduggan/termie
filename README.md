@@ -65,7 +65,7 @@ terminal sessions, whatever
 
 ## More documentation
 
-Please see the [documentation](docs.md) for a complete list of commands.
+Please see the [documentation](doc.md) for a complete list of commands.
 
 ## Examples
 
@@ -117,3 +117,8 @@ git clone https://github.com/bduggan/tmeta
 cd tmeta
 ./tmeta
 ```
+
+## See also
+
+* The [documentation](doc.md), with links to the source
+* The same [documentation](help.md) as shown by the `\help` command
