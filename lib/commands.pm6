@@ -120,10 +120,11 @@ sub run-meta($meta) is export {
         return note "repeat on multiple panes not implemented" if $*pane ~~ List;
         my $pane = $*pane;
         my $window = $*window;
+        my $newline = $*newlines;
         say "repeating (in $window.$pane) every $interval seconds: { @repeat.join(',') }";
         %repeating{"$window.$pane"} = Supply.interval($interval).tap: {
           for @repeat {
-            sendit($_, :nostore, :$pane, :$window);
+            sendit($_, :nostore, :$pane, :$window, :$newline);
             sleep 0.5;
           }
         }

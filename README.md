@@ -81,6 +81,12 @@ Please see the [documentation](doc.md) for a complete list of commands.
   > \await 02
   ```
 
+  Within a debugger session, send `next` every 2 seconds.
+  ```
+  > next
+  > \repeat 2
+  ```
+
   Search the command history for the last occurrence of 'User' using fzf
   ```
   > \find User
