@@ -69,7 +69,7 @@ In interactive mode these commands are supported:
 <dd>Run a script</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L28">\scripts</a></dt>
 <dd>show scripts in script library</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L172">\select &lt;id&gt;</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L173">\select &lt;id&gt;</a></dt>
 <dd>send to pane &lt;id&gt; instead select &lt;id&gt; &lt;id&gt;</dd>
 <dt>\send|s &lt;file&gt;</dt>
 <dd>send a file</dd>
@@ -83,7 +83,7 @@ In interactive mode these commands are supported:
 <dd>show contents of a script</dd>
 <dt>\split</dt>
 <dd>split current pane</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L132">\stop</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L133">\stop</a></dt>
 <dd>send ^C to the current pane stop &lt;id&gt; ...</dd>
 <dt>\trace</dt>
 <dd>set log level to trace</dd>
