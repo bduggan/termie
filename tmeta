@@ -30,12 +30,14 @@ my ($*pane, $*window);
 my $*buffer = 'none';
 my $*DEBUG = False;
 my %*vars;
+my $*greplines;
 
 sub init-dynvars {
   $*timeout = 5;
   $*delay = 0.1;
   $*color = 'allow';
   $*trace = 'off';
+  $*greplines = 800;
   $*newlines = True;
   my $base = $*HOME.child('.tmeta');
   .d or .mkdir with $base.IO;

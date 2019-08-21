@@ -281,6 +281,10 @@ sub run-meta($meta) is export {
         put $l;
       }
     }
+    when 'greplines' {
+      #= greplines [num] -- set between lines for \grep
+
+    }
     when 'delay' {
       #= delay [num] -- set between lines to a (decimal) value
       return say $*delay without $meta.words[1];
