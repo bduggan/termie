@@ -13,11 +13,16 @@ sub arg($cmd) {
 
 sub generate-help($for = Nil) is export {
   my @help;
-  for $=pod<>.sort -> $str {
-    next if $for && $str !~~ / $for /;
-    my ($cmd,$desc) = "$str".split('--');
+  for $=pod<>.sort -> $pod {
+    next if $for && $pod !~~ / $for /;
+    my ($cmd,$desc) = "$pod".split('--');
     next unless $desc;
-    @help.push: { text => sprintf "     \\%-30s %s",$cmd.trim,$desc.trim }
+    @help.push: { text => sprintf("     \\%-30s %s",$cmd.trim,$desc.trim),
+                  file => $pod.WHEREFORE.?file,
+                  line => $pod.WHEREFORE.?line,
+                  cmd => $cmd.trim,
+                  desc => $desc.trim,
+                }
   }
   for commander.^methods -> $m {
     next unless $m.name ~~ /^ <[a..z]>/;
@@ -29,7 +34,12 @@ sub generate-help($for = Nil) is export {
       $args = " {$<args>.trim}";
       $desc = $<desc>.trim;
     }
-    @help.push: { text => sprintf "     \\%-30s %s",$m.name.trim ~ $args,$desc }
+    @help.push: { text => sprintf("     \\%-30s %s",$m.name.trim ~ $args,$desc),
+                  file => $m.?file,
+                  line => $m.?line,
+                  cmd => $m.name.trim,
+                  desc => $desc.trim,
+    }
   }
   @help;
 }
