@@ -3,31 +3,110 @@
 use lib 'lib';
 use commands;
 
-my @help = generate-help().map({.<text>});
+sub to-url(Str $file,Int $line) {
+  'https://github.com/bduggan/tmeta/blob/master/'
+    ~ $file
+    ~ '#L'
+    ~ $line;
+}
 
-my %c = @help.classify: { $^line ~~ / ^^ \s* '\script '/ ?? 'script' !! 'interactive' };
+sub esc($str) {
+ return $str if $str.?escaped.html;
+ $str.trans( [ '<'   , '>'   , '&' ] =>
+             [ '&lt;', '&gt;', '&amp;' ])
+}
 
-say "## Currently supported commands";
+multi tag($name,$content) {
+  tag($name,{},$content);
+}
+
+multi tag($name,%attrs={},$content='') {
+  return
+  '<' ~ $name
+      ~ join ' ', %attrs.kv.map({qq[ $^key="$^value"]})
+      ~ '>'
+      ~ $content
+      ~ '</'
+      ~ $name
+      ~ '>';
+}
+
+sub h2($str) {
+  return "## $str" unless $*html;
+  tag('h2',$str);
+}
+
+sub h3($str) {
+  return "### $str" unless $*html;
+  tag('h3',$str);
+}
+
+sub dl-start {
+  return '```' unless $*html;
+  return '<dl>';
+}
+
+sub dl-end {
+  return '```' unless $*html;
+  return '</dl>';
+}
+
+sub hr {
+  return "---" unless $*html;
+  return '<hr>';
+}
+
+sub rel-file($f) {
+  $f.IO.relative('.').subst(/' (' [ \w | ':' ]+ ')' $/,'');
+}
+
+sub show-command($h) {
+  if !$*html {
+    say $h<text>;
+    return;
+  }
+  with $h<file> -> $f {
+     say tag('dt',
+            ~tag('a',{href => to-url(rel-file($f), +$h<line>)}, '\\' ~ esc($h<cmd>))
+         );
+     say tag('dd', esc($h<desc>));
+  } else {
+     say tag('dt', '\\' ~ esc($h<cmd>));
+     say tag('dd', esc($h<desc>));
+  }
+}
+
+unit sub MAIN(Bool :$*html);
+
+my @help = generate-help();
+
+my %c = @help.classify: { $^line.<text> ~~ / ^^ \s* '\script '/ ?? 'script' !! 'interactive' };
+
+say h2("Currently supported commands");
 say "";
 
-say "### Interactive";
+say h2("Interactive");
 say "";
 say "In interactive mode these commands are supported:";
 say "";
-say '```';
-say %c<interactive>.sort.join("\n");
-say '```';
+say dl-start;
 
-say "### Scripts";
+for %c<interactive>.sort(*.<text>) -> $h {
+  show-command($h);
+}
+say dl-end;
+say h3("Scripts");
 say "";
 say "In scripting mode, these additional commands are supported:";
 say "";
-say '```';
-say %c<script>.map({S/script \s* //}).sort.join("\n");
-say '```';
-
+say dl-start;
+for %c<script>.sort(*.<text>) -> $h {
+   $h<text> .= subst(/script \s* /,'');
+   show-command($h);
+}
+say dl-end;
 say "";
-say "---";
+say hr;
 say "";
 say "For more verbose descriptions of these commands, please refer to the source code!";
 
