@@ -18,7 +18,7 @@ method pwd($meta) {
 method grep($meta) {
   my $phrase = $meta.subst(/^ 'grep' /,'').trim;
   note "searching for $phrase";
-  shell "tmux capture-pane -t $*window.$*pane -S -800 -p > /tmp/grepme";
+  shell "tmux capture-pane -t $*window.$*pane -S -$*greplines -p > /tmp/grepme";
   .put for '/tmp/grepme'.IO.lines.grep: { /:i "$phrase" / };
 }
 
