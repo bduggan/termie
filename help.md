@@ -15,7 +15,7 @@ In interactive mode these commands are supported:
      \cd                             change local working dir
      \clear                          clear this pane
      \close                          kill the current pane
-     \clr                            send an clear screen char
+     \clr                            send a clear screen char
      \debug                          set log level to debug
      \delay [num]                    set between lines to a (decimal) value
      \dump <n>                       dump n (or 3000) lines of output to a file

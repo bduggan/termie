@@ -27,7 +27,7 @@ method eof($meta) {
   run <<tmux send-keys -t "$*window.$*pane" '-l' "">>;
 }
 
-#| send an clear screen char
+#| send a clear screen char
 method clr($meta) {
   run <<tmux send-keys -t "$*window.$*pane" '-l' "">>;
 }

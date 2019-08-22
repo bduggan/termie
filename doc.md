@@ -26,7 +26,7 @@ In interactive mode these commands are supported:
 <dt>\close</dt>
 <dd>kill the current pane</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L31">\clr</a></dt>
-<dd>send an clear screen char</dd>
+<dd>send a clear screen char</dd>
 <dt>\debug</dt>
 <dd>set log level to debug</dd>
 <dt>\delay [num]</dt>
