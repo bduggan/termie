@@ -58,7 +58,19 @@ sub run-meta($meta) is export {
     }
     when <shell grep pwd eof clr append show scripts edit>.any {
       my $c = $meta.words[0];
-      commander."$c"($meta)
+      try commander."$c"($meta, |($meta.words[1..*].map({ val($^x) })));
+      with $! -> $err is copy {
+        $err = $err.Str.lines[0].trans(:g, / $<num>=[\d+] / => -> { $<num> - 2 }) if $err ~~ /'Too ' [few|many]/;
+        say "Error: $err";
+        if commander.^find_method($c) -> $method {
+          my $why = $method.WHY.Str;
+          my $args = '';
+          if $why ~~ s/^^ $<args>=[.*] '--'// {
+            $args = " $<args>";
+          }
+          say "usage: $c$args -- " ~ $why;
+        }
+      }
     }
     when 'trace' {
       #= trace -- set log level to trace

@@ -9,19 +9,16 @@ use actions;
 our $script-dir is export = $*HOME.child('.tmeta').child('scripts');
 
 #| <n> <file> -- append nth shown item to script <file>
-method append($meta) {
-  my $n = $meta.words[1];
-  val($n) ~~ Int or return note "append <n> <file>";
-  my $file = $meta.words[2] or return note 'missing file';
+method append($meta, Int $n, Str $file) {
   $script-dir.child($file).IO.open(:a).say(@*shown[$n - 1]);
 }
 
 #| show contents of a script
-method show($meta) {
-  my $name = $meta.words[1] or return note 'no name';
+method show($meta, Str $name) {
   my $file = $script-dir.child($name).IO;
+  say "$file:";
   $file.IO.e or return note "could not open $file";
-  say $file.slurp;
+  say ($file.slurp || "$file is empty");
 }
 
 #| show scripts in script library
@@ -30,12 +27,10 @@ method scripts($meta) {
 }
 
 #| edit a file (default /tmp/buffer)
-method edit($meta) {
-  my $name = '/tmp/buffer';
-  with $meta.words[1] {
-    $name = $script-dir.child($_);
-  }
-  my $ok = shell "vi $name";
+method edit($meta, $name is copy = '/tmp/buffer') {
+  $name = $script-dir.child($name) unless $name.IO.is-absolute;
+  my $ed = %*ENV<EDITOR> // 'vim';
+  my $ok = shell "$ed $name";
 }
 
 #| show the last n entries
