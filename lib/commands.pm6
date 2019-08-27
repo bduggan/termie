@@ -269,10 +269,8 @@ sub run-meta($meta) is export {
       { #=( alias <key> <n> -- set <key> to item n from history (see \last) ) }
       { #=( alias <key> <str> -- alias <key> to <str> ) }
       my $key = $meta.words[1];
-      my $id = $meta.words[2] or return note 'no alias given, use aliases to see all';
-      unless $id {
+      my $id = $meta.words[2] or
         return note %*aliases{ $key } // 'no such alias';
-      }
       my $str =
         do if $id ~~ /^ \d+ $/ {
           @*shown[$id - 1];
