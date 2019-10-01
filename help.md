@@ -35,6 +35,7 @@ In interactive mode these commands are supported:
      \repeat <N>                     repeat the last command every N seconds (default 5)
      \repeat <N> <M>                 repeat the last M commands every N seconds
      \repeat stop                    stop repeating (see await)
+     \rsend                          run something and send the output
      \run <script>                   Run a script
      \scripts                        show scripts in script library
      \select <id>                    send to pane <id> instead select <id> <id>
