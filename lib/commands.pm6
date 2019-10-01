@@ -260,6 +260,22 @@ sub run-meta($meta) is export {
         confirm-send($contents, :big);
       }
     }
+    when 'rsend' | 'rs' {
+      #= rsend -- run something and send the output
+      my @prog = $meta.words[1..*];
+      say "running { @prog.join(' ') }";
+      my $proc = Proc::Async.new(|@prog);
+      my $out = $proc.stdout.lines;
+      my $p = $proc.start;
+      my $pane = $*pane;
+      my $window = $*window;
+      react whenever $out -> $str {
+        say "sending $str";
+        sendit($str, newline => True, :nostore, :$pane, :$window);
+        sleep 1;
+      }
+      await $p;
+    }
     when 'clear' {
       #= clear -- clear this pane
       shell 'tput clear';
