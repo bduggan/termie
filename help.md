@@ -18,6 +18,7 @@ In interactive mode these commands are supported:
      \clr                            send a clear screen char
      \debug                          set log level to debug
      \delay [num]                    set between lines to a (decimal) value
+     \do                             run something and send the output
      \dump <n>                       dump n (or 3000) lines of output to a file
      \edit                           edit a file (default /tmp/buffer)
      \eof                            send an eof char
@@ -35,7 +36,6 @@ In interactive mode these commands are supported:
      \repeat <N>                     repeat the last command every N seconds (default 5)
      \repeat <N> <M>                 repeat the last M commands every N seconds
      \repeat stop                    stop repeating (see await)
-     \rsend                          run something and send the output
      \run <script>                   Run a script
      \scripts                        show scripts in script library
      \select <id>                    send to pane <id> instead select <id> <id>
