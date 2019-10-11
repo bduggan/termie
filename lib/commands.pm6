@@ -260,8 +260,8 @@ sub run-meta($meta) is export {
         confirm-send($contents, :big);
       }
     }
-    when 'rsend' | 'rs' {
-      #= rsend -- run something and send the output
+    when 'do' {
+      #= do -- run something and send the output
       my @prog = $meta.words[1..*];
       say "running { @prog.join(' ') }";
       try {
