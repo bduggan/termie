@@ -335,6 +335,12 @@ sub run-meta($meta) is export {
       if arg($meta) -> $setting { $*newlines = ($setting eq 'on') }
       note 'sending newlines is ' ~ ( $*newlines ?? 'on' !! 'off' );
     }
+    when 'timing' {
+      #= timing [on|off] -- turn on or off showing times in the prompt
+      if arg($meta) -> $setting { $*timing = ($setting eq 'on') }
+      note 'showing timing is ' ~ ( $*timing ?? 'on' !! 'off' );
+    }
+
     default {
       say "unknown command $_";
     }

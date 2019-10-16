@@ -23,7 +23,7 @@ sub init(Bool :$do-log = True) {
   init-log if $do-log;
 }
 
-my ($*timeout, $*delay, $*color, $*trace, $*newlines);
+my ($*timeout, $*delay, $*color, $*trace, $*newlines, $*timing);
 my ($*log, $*log-file, $*rl-history-file, @*history, @*shown);
 my (%*aliases, $*alias-file);
 my ($*pane, $*window);
@@ -71,7 +71,13 @@ multi MAIN() {
   $r.using-history;
   $r.read-history(~$*rl-history-file);
   loop {
-    my $str = $r.readline('> ');
+    my $prompt = do
+      if $*timing {
+        DateTime.now ~ '> ';
+      } else {
+        '> ';
+      }
+    my $str = $r.readline($prompt);
     last without $str;
     $r.add-history($str);
     $r.write-history(~$*rl-history-file);

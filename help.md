@@ -46,6 +46,7 @@ In interactive mode these commands are supported:
      \show                           show contents of a script
      \split                          split current pane
      \stop                           send ^C to the current pane stop <id> ...
+     \timing [on|off]                turn on or off always sending a newline
      \trace                          set log level to trace
      \uni <text>                     Look up unicode character to output
 ```
