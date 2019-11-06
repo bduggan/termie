@@ -31,6 +31,7 @@ my $*buffer = 'none';
 my $*DEBUG = False;
 my %*vars;
 my $*greplines;
+my $*readline;
 
 sub init-dynvars {
   $*timeout = 5;
@@ -68,6 +69,7 @@ multi MAIN() {
   logger.send-to($*ERR, :level( * >= DEBUG));
   init;
   my $r = Readline.new;
+  $*readline := $r;
   $r.using-history;
   $r.read-history(~$*rl-history-file);
   loop {

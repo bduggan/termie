@@ -208,7 +208,7 @@ sub run-meta($meta) is export {
       my $proc = run <<fzf -e --no-sort --layout=reverse -q "$what">>, :in, :out;
       $proc.in.put($_) for $*log-file.IO.slurp.lines.reverse.unique;
       my $send = $proc.out.get or return;
-      confirm-send($send);
+      confirm-send($send, :add-to-history);
     }
     when 'uni' {
       #= uni <text> -- Look up unicode character to output
@@ -301,8 +301,10 @@ sub run-meta($meta) is export {
       $*alias-file.spurt: join "\n", %*aliases.kv.map: { join ': ', $^key, $^value.perl }
     }
     when 'aliases' {
-      #= aliases -- show aliases
+      #= aliases [str] -- show aliases [containing str]
+      my $str = arg($meta);
       for %*aliases.pairs.sort {
+        next if $str && (not .key.contains($str) and not .value.contains($str));
         say .key ~ ':';
         say .value.indent(4);
       }
@@ -347,7 +349,7 @@ sub run-meta($meta) is export {
   }
 }
 
-sub confirm-send($str, Bool :$big) {
+sub confirm-send($str, Bool :$big, Bool :$add-to-history = False) {
   print "~> ";
   if $big {
     say $str
@@ -363,6 +365,9 @@ sub confirm-send($str, Bool :$big) {
     }
   } else {
     sendit($str);
+  }
+  if $add-to-history {
+    $*readline.add-history($str);
   }
 }
 
