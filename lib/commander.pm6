@@ -33,22 +33,6 @@ method edit($meta, $name is copy = '/tmp/buffer') {
   my $ok = shell "$ed $name";
 }
 
-#| show the last n entries
-multi method show-last(Int:D $n, Str $meta) {
-  show(@*history.unique.tail($n).reverse);
-}
-
-#| show last 10 entries containing string
-multi method show-last(Str:D $str, Str $meta) {
-  show(@*history.unique.grep({.contains($str)}).tail(10).reverse);
-}
-
-#| show the last 10 entries
-multi method show-last(Nil, Str $meta) {
-  self.show-last(10, $meta)
-}
-
-
 #| [<str>] -- show aliases [containing a string]
 proto method aliases(|) {*}
 multi method aliases($meta, $str = "") {
