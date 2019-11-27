@@ -8,7 +8,7 @@ In interactive mode these commands are supported:
      \alias <key>                    show any alias associated with <key>
      \alias <key> <n>                set <key> to item n from history (see \last)
      \alias <key> <str>              alias <key> to <str>
-     \aliases                        show aliases
+     \aliases [<str>]                show aliases [containing a string]
      \append <n> <file>              append nth shown item to script <file>
      \await [<str> | / <regex> /]    await the appearance of regex in the output, then stop a repeat
      \capture <file>                 write to <file>
@@ -46,7 +46,7 @@ In interactive mode these commands are supported:
      \show                           show contents of a script
      \split                          split current pane
      \stop                           send ^C to the current pane stop <id> ...
-     \timing [on|off]                turn on or off always sending a newline
+     \timing [on|off]                turn on or off showing times in the prompt
      \trace                          set log level to trace
      \uni <text>                     Look up unicode character to output
 ```

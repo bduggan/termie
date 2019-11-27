@@ -11,8 +11,8 @@ In interactive mode these commands are supported:
 <dd>set &lt;key&gt; to item n from history (see \last)</dd>
 <dt>\alias &lt;key&gt; &lt;str&gt;</dt>
 <dd>alias &lt;key&gt; to &lt;str&gt;</dd>
-<dt>\aliases</dt>
-<dd>show aliases</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L37">\aliases</a></dt>
+<dd>show aliases [containing a string]</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L12">\append</a></dt>
 <dd>append nth shown item to script &lt;file&gt;</dd>
 <dt>\await [&lt;str&gt; | / &lt;regex&gt; /]</dt>
@@ -25,23 +25,25 @@ In interactive mode these commands are supported:
 <dd>clear this pane</dd>
 <dt>\close</dt>
 <dd>kill the current pane</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L31">\clr</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L35">\clr</a></dt>
 <dd>send a clear screen char</dd>
 <dt>\debug</dt>
 <dd>set log level to debug</dd>
 <dt>\delay [num]</dt>
 <dd>set between lines to a (decimal) value</dd>
+<dt>\do</dt>
+<dd>run something and send the output</dd>
 <dt>\dump &lt;n&gt;</dt>
 <dd>dump n (or 3000) lines of output to a file</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L33">\edit</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L30">\edit</a></dt>
 <dd>edit a file (default /tmp/buffer)</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L26">\eof</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L30">\eof</a></dt>
 <dd>send an eof char</dd>
 <dt>\even</dt>
 <dd>split layout vertically evenly</dd>
 <dt>\find &lt;phrase&gt;</dt>
 <dd>Find commands in the history.</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L18">\grep</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L22">\grep</a></dt>
 <dd>grep for a phrase in the output</dd>
 <dt>\greplines [num]</dt>
 <dd>set between lines for \grep</dd>
@@ -57,7 +59,7 @@ In interactive mode these commands are supported:
 <dd>turn on or off always sending a newline</dd>
 <dt>\panes</dt>
 <dd>list panes</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L13">\pwd</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L17">\pwd</a></dt>
 <dd>print current (meta) working directory</dd>
 <dt>\repeat &lt;N&gt;</dt>
 <dd>repeat the last command every N seconds (default 5)</dd>
@@ -67,9 +69,9 @@ In interactive mode these commands are supported:
 <dd>stop repeating (see await)</dd>
 <dt>\run &lt;script&gt;</dt>
 <dd>Run a script</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L28">\scripts</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L25">\scripts</a></dt>
 <dd>show scripts in script library</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L173">\select &lt;id&gt;</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L185">\select &lt;id&gt;</a></dt>
 <dd>send to pane &lt;id&gt; instead select &lt;id&gt; &lt;id&gt;</dd>
 <dt>\send|s &lt;file&gt;</dt>
 <dd>send a file</dd>
@@ -77,14 +79,16 @@ In interactive mode these commands are supported:
 <dd>send item number n</dd>
 <dt>\set &lt;var&gt; &lt;value&gt;</dt>
 <dd>set a variable for inline replacement</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L4">\shell</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L9">\shell</a></dt>
 <dd>run command in a local shell</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L20">\show</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L17">\show</a></dt>
 <dd>show contents of a script</dd>
 <dt>\split</dt>
 <dd>split current pane</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L133">\stop</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L145">\stop</a></dt>
 <dd>send ^C to the current pane stop &lt;id&gt; ...</dd>
+<dt>\timing [on|off]</dt>
+<dd>turn on or off showing times in the prompt</dd>
 <dt>\trace</dt>
 <dd>set log level to trace</dd>
 <dt>\uni &lt;text&gt;</dt>
