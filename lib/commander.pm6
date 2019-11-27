@@ -48,3 +48,11 @@ multi method show-last(Nil, Str $meta) {
   self.show-last(10, $meta)
 }
 
+#| show aliases containing a string
+multi method aliases($meta, $str = "") {
+  for %*aliases.pairs.sort {
+    next if $str && (not .key.contains($str) and not .value.contains($str));
+    say .key ~ ':';
+    say .value.indent(4);
+  }
+}

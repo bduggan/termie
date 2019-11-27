@@ -56,7 +56,7 @@ sub run-meta($meta) is export {
       %*vars{ "$<var>" } = "$<rest>";
       debug "set $<var> to $<rest>";
     }
-    when <shell grep pwd eof clr append show scripts edit>.any {
+    when <shell grep pwd eof clr append show scripts edit aliases>.any {
       my $c = $meta.words[0];
       try commander."$c"($meta, |($meta.words[1..*].map({ val($^x) })));
       with $! -> $err is copy {
@@ -287,7 +287,7 @@ sub run-meta($meta) is export {
       { #=( alias <key> -- show any alias associated with <key> ) }
       { #=( alias <key> <n> -- set <key> to item n from history (see \last) ) }
       { #=( alias <key> <str> -- alias <key> to <str> ) }
-      my $key = $meta.words[1];
+      my $key = $meta.words[1] or return commander.aliases;
       my $id = $meta.words[2] or
         return note %*aliases{ $key } // 'no such alias';
       my $str =
@@ -299,15 +299,6 @@ sub run-meta($meta) is export {
       note "saving $key = {$str.perl}";
       %*aliases{ $key } = $str;
       $*alias-file.spurt: join "\n", %*aliases.kv.map: { join ': ', $^key, $^value.perl }
-    }
-    when 'aliases' {
-      #= aliases [str] -- show aliases [containing str]
-      my $str = arg($meta);
-      for %*aliases.pairs.sort {
-        next if $str && (not .key.contains($str) and not .value.contains($str));
-        say .key ~ ':';
-        say .value.indent(4);
-      }
     }
     when 'help'|'h' {
       #= help -- this help
