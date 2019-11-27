@@ -126,4 +126,16 @@ multi MAIN(
   say $VERSION;
 }
 
+#| Show usage
+multi MAIN('help') {
+  say $*USAGE;
+}
+
+#| List all the interactive commands
+multi MAIN('commands') {
+  for generate-help().sort(*.<cmd>) {
+    next if .<text> ~~ / ^^ \s* \\ script /;
+    say .<text>;
+  }
+}
 
