@@ -48,7 +48,9 @@ multi method show-last(Nil, Str $meta) {
   self.show-last(10, $meta)
 }
 
-#| show aliases containing a string
+
+#| [<str>] -- show aliases [containing a string]
+proto method aliases(|) {*}
 multi method aliases($meta, $str = "") {
   for %*aliases.pairs.sort {
     next if $str && (not .key.contains($str) and not .value.contains($str));
