@@ -305,7 +305,6 @@ sub run-meta($meta) is export {
       my $for = $meta.words[1];
       my @help = generate-help($for).map({.<text>});
       my ($rows,$cols) = qx{stty size}.split(' ');
-      shell 'tput clear';
       for @help.grep({ .words[0] ne '\\script' } ).sort -> $l {
         if ++$ %% $rows {
           prompt 'press return for more >';
