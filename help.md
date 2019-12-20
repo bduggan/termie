@@ -21,6 +21,7 @@ In interactive mode these commands are supported:
      \do                             run something and send the output
      \dump <n>                       dump n (or 3000) lines of output to a file
      \edit                           edit a file (default /tmp/buffer)
+     \enq [<command>]                Enqueue a command for await (or clear the queue).
      \eof                            send an eof char
      \even                           split layout vertically evenly
      \find <phrase>                  Find commands in the history.

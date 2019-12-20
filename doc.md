@@ -37,6 +37,8 @@ In interactive mode these commands are supported:
 <dd>dump n (or 3000) lines of output to a file</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L30">\edit</a></dt>
 <dd>edit a file (default /tmp/buffer)</dd>
+<dt>\enq [&lt;command&gt;]</dt>
+<dd>Enqueue a command for await (or clear the queue).</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L30">\eof</a></dt>
 <dd>send an eof char</dd>
 <dt>\even</dt>
@@ -71,7 +73,7 @@ In interactive mode these commands are supported:
 <dd>Run a script</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L25">\scripts</a></dt>
 <dd>show scripts in script library</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L185">\select &lt;id&gt;</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L201">\select &lt;id&gt;</a></dt>
 <dd>send to pane &lt;id&gt; instead select &lt;id&gt; &lt;id&gt;</dd>
 <dt>\send|s &lt;file&gt;</dt>
 <dd>send a file</dd>
@@ -85,7 +87,7 @@ In interactive mode these commands are supported:
 <dd>show contents of a script</dd>
 <dt>\split</dt>
 <dd>split current pane</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L145">\stop</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L161">\stop</a></dt>
 <dd>send ^C to the current pane stop &lt;id&gt; ...</dd>
 <dt>\timing [on|off]</dt>
 <dd>turn on or off showing times in the prompt</dd>
