@@ -45,6 +45,7 @@ sub generate-help($for = Nil) is export {
 }
 
 my %repeating;
+my $queued;
 sub run-meta($meta) is export {
   return unless $meta.words[0];
   my $cmd = $meta.words[0];
@@ -96,11 +97,20 @@ sub run-meta($meta) is export {
       note "Writing output to $file";
       tmux-start-pipe(:$*window, :$*pane, :$file);
     }
+    when 'enq' {
+      #= enq [<command>] -- Enqueue a command for await (or clear the queue).
+      $queued = arg($meta);
+      note "queue is now : " ~ ($queued || '(empty)');
+    }
     when 'await' {
       #= await [<str> | / <regex> /] -- await the appearance of regex in the output, then stop a repeat
       my $regex = $meta.words[1] or return note 'missing regex';
       $regex = eval-regex($meta.subst(/^ 'await' \s+ /,''));
-      note "Waiting for " ~ $regex.perl;
+      say "Waiting for " ~ $regex.perl;
+      if $queued {
+        say "Then I will send:";
+        say $queued;
+      }
       if $*pane ~~ List {
         note "await on multiple panes not implemented";
         return;
@@ -112,8 +122,14 @@ sub run-meta($meta) is export {
       note "Done: saw " ~ $regex.perl;
       my $id = "$*window.$*pane";
       with %repeating{$id} -> $repeating {
-        note "stopping $id";
+        say "stopping $id";
         $repeating.close;
+      }
+      if $queued {
+        say "starting enqueued command: $queued";
+        sendit($queued);
+      } else {
+        say "nothing queued";
       }
     }
     when 'repeat' {
