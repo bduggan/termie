@@ -296,6 +296,25 @@ sub run-meta($meta) is export {
       }
       .Str.say with $!;
     }
+    when 'xfer' {
+      #= xfer [filename] -- send a file or directory to the remote console
+      # see http://www.perladvent.org/2019/2019-12-20.html 
+      my $filename = arg($meta);
+      $filename.IO.e or return note "$filename does not exist";
+      say "sending $filename";
+      sendit("stty -echo", newline => True, :nostore);
+      sendit("base64 --decode | tar xzf -");
+      my $proc = shell "tar czf - $filename | base64 -b 72", :out;
+      shell "tput civis";
+      react whenever $proc.out.lines -> $l {
+        print "\r      \r  " ~ ++$ ~ "      \r";
+        sendit($l, newline => True, :nostore);
+      }
+      print "                 \n";
+      shell "tput cnorm";
+      commander.eof;
+      sendit("stty echo", newline => True, :nostore);
+    }
     when 'dosh' {
       #= do -- run a shell command and send the output (text mode, line at a time)
       my $prog = arg($meta);
@@ -306,6 +325,7 @@ sub run-meta($meta) is export {
         my $pane = $*pane;
         my $window = $*window;
         sendit($str, newline => True, :nostore, :$pane, :$window);
+        print "\r      \r" ~ ++$ ~ "      \r";
       }
     }
     when 'clear' {

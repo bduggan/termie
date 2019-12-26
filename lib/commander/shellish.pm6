@@ -27,11 +27,11 @@ method grep($meta, |rest) {
 }
 
 #| send an eof char
-method eof($meta) {
+method eof($meta = '') {
   run <<tmux send-keys -t "$*window.$*pane" '-l' "">>;
 }
 
 #| send a clear screen char
-method clr($meta) {
+method clr($meta = '') {
   run <<tmux send-keys -t "$*window.$*pane" '-l' "">>;
 }
