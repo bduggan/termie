@@ -278,7 +278,7 @@ sub run-meta($meta) is export {
       }
     }
     when 'do' {
-      #= do -- run something and send the output
+      #= do -- run a (not-shell) command and send the output slowly
       my @prog = $meta.words[1..*];
       say "running { @prog.join(' ') }";
       try {
@@ -295,6 +295,18 @@ sub run-meta($meta) is export {
         await $p;
       }
       .Str.say with $!;
+    }
+    when 'dosh' {
+      #= do -- run a shell command and send the output (text mode, line at a time)
+      my $prog = arg($meta);
+      say "running $prog";
+      my $proc = shell($prog, :out);
+      my $out = $proc.out;
+      react whenever $out.lines -> $str {
+        my $pane = $*pane;
+        my $window = $*window;
+        sendit($str, newline => True, :nostore, :$pane, :$window);
+      }
     }
     when 'clear' {
       #= clear -- clear this pane
