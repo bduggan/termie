@@ -18,7 +18,8 @@ In interactive mode these commands are supported:
      \clr                            send a clear screen char
      \debug                          set log level to debug
      \delay [num]                    set between lines to a (decimal) value
-     \do                             run something and send the output
+     \do                             run a (not-shell) command and send the output slowly
+     \do                             run a shell command and send the output (text mode, line at a time)
      \dump <n>                       dump n (or 3000) lines of output to a file
      \edit                           edit a file (default /tmp/buffer)
      \enq [<command>]                Enqueue a command for await (or clear the queue).
@@ -50,6 +51,7 @@ In interactive mode these commands are supported:
      \timing [on|off]                turn on or off showing times in the prompt
      \trace                          set log level to trace
      \uni <text>                     Look up unicode character to output
+     \xfer [filename]                send a file or directory to the remote console
 ```
 ### Scripts
 

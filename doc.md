@@ -32,7 +32,9 @@ In interactive mode these commands are supported:
 <dt>\delay [num]</dt>
 <dd>set between lines to a (decimal) value</dd>
 <dt>\do</dt>
-<dd>run something and send the output</dd>
+<dd>run a (not-shell) command and send the output slowly</dd>
+<dt>\do</dt>
+<dd>run a shell command and send the output (text mode, line at a time)</dd>
 <dt>\dump &lt;n&gt;</dt>
 <dd>dump n (or 3000) lines of output to a file</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L30">\edit</a></dt>
@@ -95,6 +97,8 @@ In interactive mode these commands are supported:
 <dd>set log level to trace</dd>
 <dt>\uni &lt;text&gt;</dt>
 <dd>Look up unicode character to output</dd>
+<dt>\xfer [filename]</dt>
+<dd>send a file or directory to the remote console</dd>
 </dl>
 <h3>Scripts</h3>
 
