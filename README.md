@@ -1,6 +1,6 @@
 # tmeta
 
-A console for your consoles
+A console for your console
 
 [![Build Status](https://travis-ci.org/bduggan/tmeta.svg?branch=master)](https://travis-ci.org/bduggan/tmeta)
 
