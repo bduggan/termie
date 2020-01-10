@@ -1,6 +1,6 @@
 # tmeta
 
-Interactive and scriptable terminal console wrapper
+A console for your consoles
 
 [![Build Status](https://travis-ci.org/bduggan/tmeta.svg?branch=master)](https://travis-ci.org/bduggan/tmeta)
 
