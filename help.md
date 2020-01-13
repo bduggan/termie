@@ -8,9 +8,9 @@ In interactive mode these commands are supported:
      \alias <key>                    show any alias associated with <key>
      \alias <key> <n>                set <key> to item n from history (see \last)
      \alias <key> <str>              alias <key> to <str>
-     \aliases [<str>]                show aliases [containing a string]
+     \aliases <str>                  show aliases [containing a string]
      \append <n> <file>              append nth shown item to script <file>
-     \await [<str> | / <regex> /]    await the appearance of regex in the output, then stop a repeat
+     \await [regex]                  await the appearance of regex in the output, then stop a repeat
      \capture <file>                 write to <file>
      \cd                             change local working dir
      \clear                          clear this pane
@@ -22,7 +22,7 @@ In interactive mode these commands are supported:
      \do                             run a shell command and send the output (text mode, line at a time)
      \dump <n>                       dump n (or 3000) lines of output to a file
      \edit                           edit a file (default /tmp/buffer)
-     \enq [<command>]                Enqueue a command for await (or clear the queue).
+     \enq <command>                  Enqueue a command for await (or "clear" to clear the queue).
      \eof                            send an eof char
      \even                           split layout vertically evenly
      \find <phrase>                  Find commands in the history.
@@ -34,9 +34,7 @@ In interactive mode these commands are supported:
      \newlines [on|off]              turn on or off always sending a newline
      \panes                          list panes
      \pwd                            print current (meta) working directory
-     \repeat <N>                     repeat the last command every N seconds (default 5)
-     \repeat <N> <M>                 repeat the last M commands every N seconds
-     \repeat stop                    stop repeating (see await)
+     \repeat <N> <M> | <stop>        repeat the last M commands every N seconds (or stop a repeat)
      \run <script>                   Run a script
      \scripts                        show scripts in script library
      \select <id>                    send to pane <id> instead select <id> <id>

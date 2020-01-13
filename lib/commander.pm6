@@ -1,7 +1,9 @@
 unit class commander;
 
 use commander::shellish;
+use commander::godot;
 also does commander::shellish;
+also does commander::godot;
 
 use tester;
 use actions;
@@ -33,7 +35,7 @@ method edit($meta, $name is copy = '/tmp/buffer') {
   my $ok = shell "$ed $name";
 }
 
-#| [<str>] -- show aliases [containing a string]
+#| <str> -- show aliases [containing a string]
 proto method aliases(|) {*}
 multi method aliases($meta, $str = "") {
   for %*aliases.pairs.sort {

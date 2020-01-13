@@ -7,11 +7,7 @@ use actions;
 use waiter;
 use tester;
 use tmux;
-
-sub arg($cmd) {
-  my $wd = $cmd.words[0];
-  return $cmd.subst($wd,'').trim;
-}
+use utils;
 
 method generate-help($for = Nil) {
   my @help;
@@ -26,10 +22,13 @@ method generate-help($for = Nil) {
                   desc => $desc.trim,
                 }
   }
-  for commander.^methods -> $m {
+  for self.^methods -> $m {
     next unless $m.name ~~ /^ <[a..z]>/;
     next if $for && $m.name !~~ / $for /;
-    next note "No docs for {$m.name}" unless $m.WHY;
+    unless $m.WHY {
+      note "No docs for {$m.name}";
+      next;
+    }
     my $desc = $m.WHY.Str.trim;
     my $args = '';
     if $desc ~~ /^ $<args>=[.*] '--' $<desc>=[.*] $/ {
@@ -54,8 +53,6 @@ method execute($str) is export {
   }
 }
 
-my %repeating;
-my $queued;
 method run-meta($meta) is export {
   return unless $meta.words[0];
   my $cmd = $meta.words[0];
@@ -67,13 +64,13 @@ method run-meta($meta) is export {
       %*vars{ "$<var>" } = "$<rest>";
       debug "set $<var> to $<rest>";
     }
-    when <shell grep pwd eof clr append show scripts edit aliases>.any {
+    when <shell grep pwd eof clr append show scripts edit aliases await enq repeat>.any {
       my $c = $meta.words[0];
-      try commander."$c"($meta, |($meta.words[1..*].map({ val($^x) })));
+      try self."$c"($meta, |($meta.words[1..*].map({ val($^x) })));
       with $! -> $err is copy {
         $err = $err.Str.lines[0].trans(:g, / $<num>=[\d+] / => -> { $<num> - 2 }) if $err ~~ /'Too ' [few|many]/;
         say "Error: $err";
-        if commander.^find_method($c) -> $method {
+        if self.^find_method($c) -> $method {
           my $why = $method.WHY.Str;
           my $args = '';
           if $why ~~ s/^^ $<args>=[.*] '--'// {
@@ -106,67 +103,6 @@ method run-meta($meta) is export {
       }
       note "Writing output to $file";
       tmux-start-pipe(:$*window, :$*pane, :$file);
-    }
-    when 'enq' {
-      #= enq [<command>] -- Enqueue a command for await (or clear the queue).
-      $queued = arg($meta);
-      note "queue is now : " ~ ($queued || '(empty)');
-    }
-    when 'await' {
-      #= await [<str> | / <regex> /] -- await the appearance of regex in the output, then stop a repeat
-      my $regex = $meta.words[1] or return note 'missing regex';
-      $regex = eval-regex($meta.subst(/^ 'await' \s+ /,''));
-      say "Waiting for " ~ $regex.perl;
-      if $queued {
-        say "Then I will send:";
-        say $queued;
-      }
-      if $*pane ~~ List {
-        note "await on multiple panes not implemented";
-        return;
-      }
-      react whenever output-stream(:$*window,:$*pane) -> $l {
-        done if $regex ~~ Str and $l ~~ / $regex /;
-        done if $l ~~ $regex;
-      }
-      note "Done: saw " ~ $regex.perl;
-      my $id = "$*window.$*pane";
-      with %repeating{$id} -> $repeating {
-        say "stopping $id";
-        $repeating.close;
-      }
-      if $queued {
-        say "starting enqueued command: $queued";
-        self.execute($queued);
-      } else {
-        say "nothing queued";
-      }
-    }
-    when 'repeat' {
-      { #=( repeat <N> -- repeat the last command every N seconds (default 5) ) }
-      { #=( repeat <N> <M> -- repeat the last M commands every N seconds ) }
-      { #=( repeat stop -- stop repeating (see await) ) }
-      if ( ($meta.words[1] || '') eq 'stop') {
-        my $key = $meta.words[2] || %repeating.keys.first;
-        %repeating{ $key }:exists or return note "can't find $key";
-        say "stopping $key";
-        .close with %repeating{ $key }:delete;
-      } else {
-        my $interval = $meta.words[1] // 5;
-        my $last = $meta.words[2] // 1;
-        my @repeat = @*history[*-$last..*];
-        return note "repeat on multiple panes not implemented" if $*pane ~~ List;
-        my $pane = $*pane;
-        my $window = $*window;
-        my $newline = $*newlines;
-        say "repeating (in $window.$pane) every $interval seconds: { @repeat.join(',') }";
-        %repeating{"$window.$pane"} = Supply.interval($interval).tap: {
-          for @repeat {
-            sendit($_, :nostore, :$pane, :$window, :$newline);
-            sleep 0.5;
-          }
-        }
-      }
     }
     when 'stop' {
       #= stop -- send ^C to the current pane
@@ -248,7 +184,7 @@ method run-meta($meta) is export {
       sendit($first, :!newline);
     }
     when 'last'|'l' {
-      commander.show-last($meta.words[1],$meta);
+      self.show-last($meta.words[1],$meta);
     }
     when 'dump' {
       #= dump <n> -- dump n (or 3000) lines of output to a file
@@ -322,7 +258,7 @@ method run-meta($meta) is export {
       }
       print "                 \n";
       shell "tput cnorm";
-      commander.eof;
+      self.eof;
       sendit("stty echo", newline => True, :nostore);
     }
     when 'dosh' {
@@ -346,7 +282,7 @@ method run-meta($meta) is export {
       { #=( alias <key> -- show any alias associated with <key> ) }
       { #=( alias <key> <n> -- set <key> to item n from history (see \last) ) }
       { #=( alias <key> <str> -- alias <key> to <str> ) }
-      my $key = $meta.words[1] or return commander.aliases;
+      my $key = $meta.words[1] or return self.aliases;
       my $id = $meta.words[2] or
         return note %*aliases{ $key } // 'no such alias';
       my $str =
