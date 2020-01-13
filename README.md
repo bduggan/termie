@@ -89,6 +89,7 @@ Please see the [documentation](doc.md) for a complete list of commands.
   ```
 
   Search the command history for the last occurrence of 'User' using fzf
+  (readline keybindings work too)
   ```
   > \find User
   ```
@@ -108,6 +109,38 @@ Please see the [documentation](doc.md) for a complete list of commands.
   > \delay 1
   > \send bigfile.rb
   ```
+
+  Similar, but send it to an ssh console by first tarring and base64 encoding
+  and not echoing stdout, and note that 'something' can also be a directory:0
+  ```
+  > \xfer something
+  ```
+
+  Run a command locally, sending each line of output to the remote console:
+  ```
+  > \do echo date
+  ```
+
+  Run a shell snippet locally, sending each line of output to the remote console:
+  ```
+  > \dosh for i in `seq 5`; do echo "ping host-$i"; done
+  ```
+
+  Start printing the numbers 1 through 100, one per second, but send a ctrl-c
+  when the number 10 is printed:
+  ```
+  > \enq \stop
+  queue is now : \stop
+  > for i in `seq 100`; do echo $i; sleep 1; done
+  # .. starts running in other pane ...
+  > \await 10
+  Waiting for "10"
+  Then I will send:
+  \stop
+  Done: saw "10"
+  starting enqueued command: \stop
+  ```
+
 
 ## Installation
 
