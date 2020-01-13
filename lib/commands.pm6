@@ -1,9 +1,11 @@
-unit module commands;
+
+use commander;
+
+unit class commands is commander;
 use Log::Async;
 use actions;
 use waiter;
 use tester;
-use commander;
 use tmux;
 
 sub arg($cmd) {
@@ -11,7 +13,7 @@ sub arg($cmd) {
   return $cmd.subst($wd,'').trim;
 }
 
-sub generate-help($for = Nil) is export {
+method generate-help($for = Nil) {
   my @help;
   for $=pod<>.sort -> $pod {
     next if $for && $pod !~~ / $for /;
@@ -44,9 +46,9 @@ sub generate-help($for = Nil) is export {
   @help;
 }
 
-sub execute($str) is export {
+method execute($str) is export {
   if $str ~~ /^ \\ $<rest>=[.*] $ / {
-    run-meta("$<rest>");
+    self.run-meta("$<rest>");
   } else {
     sendit($str);
   }
@@ -54,7 +56,7 @@ sub execute($str) is export {
 
 my %repeating;
 my $queued;
-sub run-meta($meta) is export {
+method run-meta($meta) is export {
   return unless $meta.words[0];
   my $cmd = $meta.words[0];
   given $cmd {
@@ -135,7 +137,7 @@ sub run-meta($meta) is export {
       }
       if $queued {
         say "starting enqueued command: $queued";
-        execute($queued);
+        self.execute($queued);
       } else {
         say "nothing queued";
       }
@@ -223,7 +225,7 @@ sub run-meta($meta) is export {
       $script = $script-dir.child($script) unless $script.IO.e;
       $script.IO.e or return note "can't find $script";
       my $tester = tester.new;
-      run-script($script, :$tester);
+      self.run-script($script, :$tester);
       $tester.report;
     }
     when 'find' {
@@ -360,7 +362,7 @@ sub run-meta($meta) is export {
     when 'help'|'h' {
       #= help -- this help
       my $for = $meta.words[1];
-      my @help = generate-help($for).map({.<text>});
+      my @help = self.generate-help($for).map({.<text>});
       my ($rows,$cols) = qx{stty size}.split(' ');
       for @help.grep({ .words[0] ne '\\script' } ).sort -> $l {
         if ++$ %% $rows {
@@ -426,47 +428,7 @@ sub send-capture($key, Channel $captured, :$newline) {
   sendit( ~$msg{$key}, :$newline );
 }
 
-sub send-by-char($send,$window,$pane) {
-  run <<tmux send-keys -t "$window.$pane" -l>>, |($send.comb.map({ S:g/';'/\\;/ }));
-}
-
-sub sendit($str,
-  Bool :$nostore = False,
-  Bool :$newline = $*newlines,
-  :$pane = $*pane,
-  :$window = $*window,
-) is export {
-  add-to-history($str) unless $nostore;
-  if $str ~~ /^ $<part> = [.*] '...' \s* $/ {
-    my $part = "$<part>";
-    for (@$pane) -> $pane {
-      if $part ~~ /<[-'"\\;]>/ {
-        send-by-char($part);
-      } else {
-        run <<tmux send-keys -t "$window.$pane" -l "$part">>;
-      }
-    }
-    return;
-  }
-  my $send = $str;
-  for (@$pane) -> $pane {
-    trace "sending $send";
-    if $send ~~ /<[-'"\\;]>/ {
-      send-by-char($send,$window,$pane);
-    } else {
-      run <<tmux send-keys -t "$window.$pane" -l "$send">>;
-    }
-    run <<tmux send-keys -t "$window.$pane" enter>> if $newline;
-  }
-}
-
-
-sub add-to-history($str) {
-  @*history.push: $str.Str;
-  $*log.put: ~$str if $*log;
-}
-
-sub run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@commands, :$i) {
+method run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@commands, :$i) {
   my @cmd = $cmd.words;
   given @cmd[0] {
     when 'run' {
@@ -474,7 +436,7 @@ sub run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@command
       my $new = $script.IO.sibling($target);
       $new.IO.e or return $tester.failed("Cannot open $new");
       debug "running $new";
-      run-script($new, :$tester); 
+      self.run-script($new, :$tester); 
     }
     when 'color' {
       #= script color [on|off] -- turn off color (i.e. filter out ansi escapes)
@@ -542,7 +504,7 @@ sub run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@command
       send-capture(@cmd[1], $captured, :$newline);
     }
     default {
-      run-meta($cmd);
+      self.run-meta($cmd);
     }
   }
   return 0;
@@ -564,7 +526,7 @@ sub has-content($str) {
   return so $str ~~ /\S/;
 }
 
-sub run-script($script, :$tester) is export {
+method run-script($script, :$tester) is export {
   my @commands = $script.IO.lines.grep({has-content($_)});
   my $waiter = waiter.new(timeout => +$*timeout);
   my Channel $captured .= new;
@@ -577,7 +539,7 @@ sub run-script($script, :$tester) is export {
     replace-aliases($cmd);
     replace-vars($cmd);
     if $cmd ~~ / ^ '\\' $<rest>=[.*] $ / {
-      run-script-command("$<rest>",
+      self.run-script-command("$<rest>",
         :$waiter,
         :$tester,
         :$script,

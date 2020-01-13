@@ -97,3 +97,44 @@ sub tmux-dump(:$window,:$pane,:$lines) is export {
   shell "tmux capture-pane -t $*window.$*pane -S -$lines -p > /tmp/out";
 }
 
+sub sendit($str,
+  Bool :$nostore = False,
+  Bool :$newline = $*newlines,
+  :$pane = $*pane,
+  :$window = $*window,
+) is export {
+  add-to-history($str) unless $nostore;
+  if $str ~~ /^ $<part> = [.*] '...' \s* $/ {
+    my $part = "$<part>";
+    for (@$pane) -> $pane {
+      if $part ~~ /<[-'"\\;]>/ {
+        send-by-char($part);
+      } else {
+        run <<tmux send-keys -t "$window.$pane" -l "$part">>;
+      }
+    }
+    return;
+  }
+  my $send = $str;
+  for (@$pane) -> $pane {
+    trace "sending $send";
+    if $send ~~ /<[-'"\\;]>/ {
+      send-by-char($send,$window,$pane);
+    } else {
+      run <<tmux send-keys -t "$window.$pane" -l "$send">>;
+    }
+    run <<tmux send-keys -t "$window.$pane" enter>> if $newline;
+  }
+}
+
+
+sub add-to-history($str) {
+  @*history.push: $str.Str;
+  $*log.put: ~$str if $*log;
+}
+
+sub send-by-char($send,$window,$pane) {
+  run <<tmux send-keys -t "$window.$pane" -l>>, |($send.comb.map({ S:g/';'/\\;/ }));
+}
+
+

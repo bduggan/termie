@@ -69,6 +69,7 @@ multi MAIN() {
   logger.send-to($*ERR, :level( * >= DEBUG));
   init;
   my $r = Readline.new;
+  my $cmd = commands.new;
   $*readline := $r;
   $r.using-history;
   $r.read-history(~$*rl-history-file);
@@ -87,7 +88,7 @@ multi MAIN() {
     last if $str eq any( '\\quit', '\\exit' );
     replace-aliases($str);
     replace-vars($str);
-    execute($str);
+    $cmd.execute($str);
   }
 }
 
@@ -110,7 +111,8 @@ multi MAIN(
   }
   init(:!do-log);
   my $tester = tester.new;
-  run-script($script, :$tester);
+  my $cmd = commands.new;
+  $cmd.run-script($script, :$tester);
   $tester.complete;
   $tester.report if $report
 }
@@ -129,7 +131,8 @@ multi MAIN('help') {
 
 #| List all the interactive commands
 multi MAIN('commands') {
-  for generate-help().sort(*.<cmd>) {
+  my $cmd = commands.new;
+  for $cmd.generate-help().sort(*.<cmd>) {
     next if .<text> ~~ / ^^ \s* \\ script /;
     say .<text>;
   }
