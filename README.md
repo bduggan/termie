@@ -21,6 +21,7 @@ Because you get:
 
 - an uncluttered view of your commands separate from the output
 - a local history for commands that are run remotely
+- readline interface independent of the remote console
 - scripting support for programs that require a TTY
 - macros
 - the ability to monitor or capture output

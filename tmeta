@@ -87,11 +87,7 @@ multi MAIN() {
     last if $str eq any( '\\quit', '\\exit' );
     replace-aliases($str);
     replace-vars($str);
-    if $str ~~ /^ \\ $<rest>=[.*] $ / {
-      run-meta("$<rest>");
-    } else {
-      sendit($str);
-    }
+    execute($str);
   }
 }
 

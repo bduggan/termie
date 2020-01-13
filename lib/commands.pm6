@@ -44,6 +44,14 @@ sub generate-help($for = Nil) is export {
   @help;
 }
 
+sub execute($str) is export {
+  if $str ~~ /^ \\ $<rest>=[.*] $ / {
+    run-meta("$<rest>");
+  } else {
+    sendit($str);
+  }
+}
+
 my %repeating;
 my $queued;
 sub run-meta($meta) is export {
@@ -127,7 +135,7 @@ sub run-meta($meta) is export {
       }
       if $queued {
         say "starting enqueued command: $queued";
-        sendit($queued);
+        execute($queued);
       } else {
         say "nothing queued";
       }
