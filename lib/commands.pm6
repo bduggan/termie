@@ -393,7 +393,7 @@ sub confirm-send($str, Bool :$big, Bool :$add-to-history = False) {
   if $big {
     say $str
   } else {
-    print $str.perl;
+    put $str;
   }
   my $ok = prompt " [q to abort]>";
   return if $ok ~~ /:i 'q'/;
