@@ -78,7 +78,7 @@ sub show-command($h) {
 
 unit sub MAIN(Bool :$*html);
 
-my @help = generate-help();
+my @help = commands.new.generate-help();
 
 my %c = @help.classify: { $^line.<text> ~~ / ^^ \s* '\script '/ ?? 'script' !! 'interactive' };
 
