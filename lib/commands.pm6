@@ -53,10 +53,25 @@ method execute($str) is export {
   }
 }
 
+my $grabfile = "/tmp/grabbed".IO;
+
 method run-meta($meta) is export {
   return unless $meta.words[0];
   my $cmd = $meta.words[0];
   given $cmd {
+    when 'grab' {
+      #= grab the next line after running a command, and save it to a file
+      my $line;
+      my ($window,$pane) = ($*window,$*pane);
+      my $p = start react whenever output-stream(:$window,:$pane,:buffer<lines>,:new) -> $l {
+        $line = $l;
+        done if ++$ > 2;
+      }
+      sendit($meta.subst('grab ',''), :newline);
+      await $p;
+      $grabfile.spurt: $line;
+      note "wrote { $line.chars } chars to $grabfile";
+    }
     when 'set' {
       #= set <var> <value> -- set a variable for inline replacement
       $meta ~~ /^ set \s+ $<var>=[\w+] \s+ $<rest>=[.*] $/;
