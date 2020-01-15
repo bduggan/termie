@@ -141,6 +141,15 @@ Please see the [documentation](doc.md) for a complete list of commands.
   starting enqueued command: \stop
   ```
 
+  Add an alias `cat` which cats a local file
+  ```
+  \alias cat \shell cat
+  ```
+
+  Show a local file (do not send it to the other pane) using the above alias
+  ```
+  \cat myfile
+  ```
 
 ## Installation
 
