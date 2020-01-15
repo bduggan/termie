@@ -59,11 +59,4 @@ sub wait_for(Str $what, Channel $captured, Supply :$from --> Promise) is export 
   }
 }
 
-sub show(@list) is export {
-  @*shown = @list;
-  my $i = 0;
-  for @list -> $s {
-    say ++$i ~ ') ' ~ $s;
-  }
-}
 

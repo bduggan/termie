@@ -199,7 +199,14 @@ method run-meta($meta) is export {
       sendit($first, :!newline);
     }
     when 'last'|'l' {
-      self.show-last($meta.words[1],$meta);
+      #= last [n] -- show last n (or 10) commands (see alias)
+      my $count = arg($meta) || 10;
+      my @list = @*history.tail($count);
+      @*shown = @list;
+      my $i = 0;
+      for @list -> $s {
+        say ++$i ~ ') ' ~ $s;
+      }
     }
     when 'dump' {
       #= dump <n> -- dump n (or 3000) lines of output to a file
