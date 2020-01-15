@@ -11,6 +11,7 @@ method shell($meta, |rest) {
  unless $proc.exitcode==0 {
    say "exit status " ~ $proc.exitcode;
  }
+ put "";
 }
 
 #| print current (meta) working directory
