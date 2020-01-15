@@ -39,9 +39,11 @@ sub tmux-start-pipe(:$window,:$pane,:$file is copy) is export {
   $file;
 }
 
-sub tail($file --> Supply) is export {
-  if $*PERL.compiler.version ~~ v2019.07.* {
-    # See rakudo#3100 on github
+sub tail($file, Bool :$new --> Supply) is export {
+  sleep 0.1;
+  $file.IO.e or die "cannot tail -- no such file $file";
+  if True { # See rakudo#3100 on github
+    # $*PERL.compiler.version ~~ v2019.07.*
     my $proc = Proc::Async.new(<<tail -f $file>>);
     my $supply = $proc.stdout;
     $proc.start;
@@ -57,13 +59,15 @@ sub tail($file --> Supply) is export {
       }
     }
   }
-  sleep 0.1;
-  $file.IO.e or die "cannot tail -- no such file $file";
+  # awaiting next libuv release
+  # https://github.com/rakudo/rakudo/issues/3100
   supply {
     my $in = $file.IO.open;
-    emit $in.read.decode;
+    my $start = $in.read.decode;
+    emit $start unless $new;
     my $last = $in.tell;
     whenever $file.IO.watch -> $e {
+      debug "waiting!";
       $in.seek($last) if $last;
       emit $in.read.decode;
       $last = $in.tell;
