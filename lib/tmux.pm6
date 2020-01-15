@@ -75,10 +75,19 @@ sub tail($file, Bool :$new --> Supply) is export {
   }
 }
 
-sub output-stream(:$window = $*window, :$pane = $*pane) is export {
+sub output-stream(:$window = $*window, :$pane = $*pane, :$buffer = $*buffer, Bool :$new) is export {
+  # some consoles (*cough* rails *cough*) send ansi sequences instead of newlines
+  # down is 'esc [ 1 B', beginning of line is 'esc [ 0 G'
+  my $nl = "\x[1B][1B\x[1B][0G";
   my $file = tmux-start-pipe(:$window,:$pane);
-  return tail($file).lines if $*buffer eq 'lines';
-  tail($file);
+  tail($file, :$new) unless $buffer eq 'lines';
+  return supply {
+    whenever tail($file, :$new).lines -> $line {
+      for $line.split(/$nl/) -> $piece {
+        emit $piece
+      }
+    }
+  }
 }
 
 sub tmux-kill-pane(:$window,:$pane) is export {
