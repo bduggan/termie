@@ -102,6 +102,10 @@ sub tmux-even is export {
   shell "tmux select-layout even-vertical";
 }
 
+sub tmux-small is export {
+  shell "tmux resize-pane -y 10";
+}
+
 sub tmux-show is export {
   shell "tmux display-panes";
 }

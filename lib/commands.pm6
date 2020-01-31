@@ -148,6 +148,10 @@ method run-meta($meta) is export {
       #= even -- split layout vertically evenly
       tmux-even;
     }
+    when 'small' {
+      #= small -- make the command pane small
+      tmux-small;
+    }
     when 'panes' {
       #= panes -- list panes
       tmux-list.lines.classify:
