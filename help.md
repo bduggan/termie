@@ -29,6 +29,7 @@ In interactive mode these commands are supported:
      \grep                           grep for a phrase in the output
      \help                           this help
      \info                           set log level to info
+     \last [n]                       show last n (or 10) commands (see alias)
      \ls <opts>                      run ls in this pane
      \n                              run command in item number n
      \newlines [on|off]              turn on or off always sending a newline
@@ -43,6 +44,7 @@ In interactive mode these commands are supported:
      \set <var> <value>              set a variable for inline replacement
      \shell                          run command in a local shell
      \show                           show contents of a script
+     \small                          make the command pane small
      \split                          split current pane
      \stop                           send ^C to the current pane stop <id> ...
      \timing [on|off]                turn on or off showing times in the prompt

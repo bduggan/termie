@@ -25,7 +25,7 @@ In interactive mode these commands are supported:
 <dd>clear this pane</dd>
 <dt>\close</dt>
 <dd>kill the current pane</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L35">\clr</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L36">\clr</a></dt>
 <dd>send a clear screen char</dd>
 <dt>\debug</dt>
 <dd>set log level to debug</dd>
@@ -41,18 +41,20 @@ In interactive mode these commands are supported:
 <dd>edit a file (default /tmp/buffer)</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/godot.pm6#L42">\enq</a></dt>
 <dd>Enqueue a command for await (or "clear" to clear the queue).</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L30">\eof</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L31">\eof</a></dt>
 <dd>send an eof char</dd>
 <dt>\even</dt>
 <dd>split layout vertically evenly</dd>
 <dt>\find &lt;phrase&gt;</dt>
 <dd>Find commands in the history.</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L22">\grep</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L23">\grep</a></dt>
 <dd>grep for a phrase in the output</dd>
 <dt>\help</dt>
 <dd>this help</dd>
 <dt>\info</dt>
 <dd>set log level to info</dd>
+<dt>\last [n]</dt>
+<dd>show last n (or 10) commands (see alias)</dd>
 <dt>\ls &lt;opts&gt;</dt>
 <dd>run ls in this pane</dd>
 <dt>\n</dt>
@@ -61,7 +63,7 @@ In interactive mode these commands are supported:
 <dd>turn on or off always sending a newline</dd>
 <dt>\panes</dt>
 <dd>list panes</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L17">\pwd</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L18">\pwd</a></dt>
 <dd>print current (meta) working directory</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/godot.pm6#L49">\repeat</a></dt>
 <dd>repeat the last M commands every N seconds (or stop a repeat)</dd>
@@ -69,7 +71,7 @@ In interactive mode these commands are supported:
 <dd>Run a script</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L27">\scripts</a></dt>
 <dd>show scripts in script library</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L147">\select &lt;id&gt;</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L166">\select &lt;id&gt;</a></dt>
 <dd>send to pane &lt;id&gt; instead select &lt;id&gt; &lt;id&gt;</dd>
 <dt>\send|s &lt;file&gt;</dt>
 <dd>send a file</dd>
@@ -81,9 +83,11 @@ In interactive mode these commands are supported:
 <dd>run command in a local shell</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L19">\show</a></dt>
 <dd>show contents of a script</dd>
+<dt>\small</dt>
+<dd>make the command pane small</dd>
 <dt>\split</dt>
 <dd>split current pane</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L107">\stop</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L122">\stop</a></dt>
 <dd>send ^C to the current pane stop &lt;id&gt; ...</dd>
 <dt>\timing [on|off]</dt>
 <dd>turn on or off showing times in the prompt</dd>
