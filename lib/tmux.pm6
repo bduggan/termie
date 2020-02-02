@@ -80,7 +80,7 @@ sub output-stream(:$window = $*window, :$pane = $*pane, :$buffer = $*buffer, Boo
   # down is 'esc [ 1 B', beginning of line is 'esc [ 0 G'
   my $nl = "\x[1B][1B\x[1B][0G";
   my $file = tmux-start-pipe(:$window,:$pane);
-  tail($file, :$new) unless $buffer eq 'lines';
+  return tail($file, :$new) unless $buffer eq 'lines';
   return supply {
     whenever tail($file, :$new).lines -> $line {
       for $line.split(/$nl/) -> $piece {
