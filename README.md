@@ -160,10 +160,9 @@ On OS/X
 brew install fzf
 brew install tmux
 brew install perl6
-zef install Log::Async
-zef install Readline
 git clone https://github.com/bduggan/tmeta
 cd tmeta
+zef install --deps-only .
 ./tmeta
 ```
 

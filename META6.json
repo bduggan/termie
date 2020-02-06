@@ -1,0 +1,20 @@
+{
+    "name" : "tmeta",
+    "source-url" : "https://github.com/bduggan/tmeta",
+    "perl" : "6.*",
+    "build-depends" : [ ],
+    "provides" : {
+    },
+    "tags" : [
+        ],
+    "depends" : [
+        "Readline", "Log::Async"
+    ],
+    "description" : "A console for your console",
+    "test-depends" : [ ],
+    "version" : "0.0.1",
+    "license" : "MIT",
+    "authors" : [
+        "Brian Duggan"
+    ]
+}
