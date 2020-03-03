@@ -308,7 +308,7 @@ method run-meta($meta) is export {
       { #=( alias <key> -- show any alias associated with <key> ) }
       { #=( alias <key> <n> -- set <key> to item n from history (see \last) ) }
       { #=( alias <key> <str> -- alias <key> to <str> ) }
-      my $key = $meta.words[1] or return self.aliases;
+      my $key = $meta.words[1] or return note 'aliases: ' ~ %*aliases.keys.sort.join(' ');
       my $id = $meta.words[2] or
         return note %*aliases{ $key } // 'no such alias';
       my $str =
