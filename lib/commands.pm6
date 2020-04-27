@@ -177,9 +177,11 @@ method run-meta($meta) is export {
     when 'run' {
       #= run <script> -- Run a script
       my $script = $meta.words[1];
-      $script = $script-dir.child($script) unless $script.IO.e;
-      $script.IO.e or return note "can't find $script";
+      trace "running $script";
+      $script = $script-dir.child($script) unless $script.IO.f;
+      $script.IO.f or return note "no such file: $script";
       my $tester = tester.new;
+      trace "running {$script.IO.absolute}";
       self.run-script($script, :$tester);
       $tester.report;
     }
@@ -532,6 +534,7 @@ method run-script($script, :$tester) is export {
 }
 
 sub replace-aliases($str is rw) is export {
+  trace "expanding alias $str";
   my @aliases = keys %*aliases;
   while $str ~~ /^ \\ $<meta> = [ [ @aliases <?before \s> ] || [ .* $ ] ] / {
 
