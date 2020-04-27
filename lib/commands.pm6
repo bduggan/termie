@@ -413,6 +413,12 @@ method run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@comm
       #= script trace [off|on] -- turn on tracing
       $*trace = @cmd[1];
     }
+    when 'pause' {
+      #= pause <msg>-- show msg or 'press return to continue'
+      my $msg = $cmd.subst('pause','').trim;
+      sleep 0.3;
+      prompt $msg || "press return to continue:"
+    }
     when 'wait' {
       { #=( script wait for <regex> -- wait for a regex immediately ) }
       { #=( script wait <delay> <regex> -- wait after <delay> more steps for a regex ) }
