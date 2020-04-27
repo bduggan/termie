@@ -39,7 +39,8 @@ method await($meta, Str $what) {
 }
 
 #| <command> -- Enqueue a command for await (or "clear" to clear the queue).
-method enq($meta, Str $what) {
+method enq($meta, |rest) {
+  my $what = $meta.subst( / ^enq \s+ /,'');
   $queued = $what if $what;
   $queued = Nil if $what eq 'clear';
   note "queue is now : " ~ ($queued || '(empty)');
