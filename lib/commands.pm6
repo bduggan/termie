@@ -363,8 +363,9 @@ sub confirm-send($str, Bool :$big, Bool :$add-to-history = False) {
   } else {
     put $str;
   }
-  my $ok = prompt " [q to abort]>";
-  return if $ok ~~ /:i 'q'/;
+  my $ok = prompt " [q to abort, e to edit (from history)]>";
+  $*readline.add-history($str) if $ok ~~ /:i e/;
+  return if $ok ~~ /:i [ q | e ]/;
   if ($big) {
     for $str.lines -> $l {
       sendit($l, :nostore);
