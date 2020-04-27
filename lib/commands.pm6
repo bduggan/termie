@@ -215,7 +215,7 @@ method run-meta($meta) is export {
     when 'dump' {
       #= dump <n> -- dump n (or 3000) lines of output to a file
       my $lines = $meta.words[1] // 3000;
-      return note "dump [n] -- where n is the number of lines" unless $lines ~~ Int;
+      return note "dump [n] -- where n is the number of lines" unless val($lines) ~~ Int;
       tmux-dump(:$*window,:$*pane,:$lines);
       say "wrote last $lines lines from pane $*window.$*pane to /tmp/out";
     }
