@@ -245,7 +245,7 @@ method run-meta($meta) is export {
       } else {
         my $file = $which;
         return note "can't open $file" unless $file.IO.e;
-        my $contents = $file.IO.slurp;
+        my $contents = $file.IO.lines.grep({ not /^ \s* '#'/ }).join("\n");
         confirm-send($contents, :big);
       }
     }
