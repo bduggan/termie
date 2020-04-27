@@ -38,7 +38,7 @@ sub init-dynvars {
   $*delay = 0.1;
   $*color = 'allow';
   $*trace = 'off';
-  $*greplines = 800;
+  $*greplines = 3000;
   $*newlines = True;
   my $base = $*HOME.child('.tmeta');
   .d or .mkdir with $base.IO;
