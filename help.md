@@ -34,6 +34,7 @@ In interactive mode these commands are supported:
      \n                              run command in item number n
      \newlines [on|off]              turn on or off always sending a newline
      \panes                          list panes
+     \pause <msg>                    show msg or 'press return to continue'
      \pwd                            print current (meta) working directory
      \repeat <N> <M> | <stop>        repeat the last M commands every N seconds (or stop a repeat)
      \run <script>                   Run a script

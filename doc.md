@@ -63,9 +63,11 @@ In interactive mode these commands are supported:
 <dd>turn on or off always sending a newline</dd>
 <dt>\panes</dt>
 <dd>list panes</dd>
+<dt>\pause &lt;msg&gt;</dt>
+<dd>show msg or 'press return to continue'</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/shellish.pm6#L18">\pwd</a></dt>
 <dd>print current (meta) working directory</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/godot.pm6#L49">\repeat</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander/godot.pm6#L50">\repeat</a></dt>
 <dd>repeat the last M commands every N seconds (or stop a repeat)</dd>
 <dt>\run &lt;script&gt;</dt>
 <dd>Run a script</dd>
