@@ -541,8 +541,9 @@ sub replace-aliases($str is rw) is export {
     trace "meta command: '$str', will be: $<meta>";
 
     if %*aliases{ "$<meta>" } -> $a {
-      trace "replacing $<meta> with $a";
-      $str = $str.subst( / \\ "$<meta>" / , $a );
+      my $got = "$<meta>";
+      trace "replacing $got with $a";
+      $str = $str.subst( / \\ "$got" / , $a );
       next;
     }
 
