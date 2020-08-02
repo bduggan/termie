@@ -188,7 +188,7 @@ method run-meta($meta) is export {
     when 'find' {
       #= find <phrase> -- Find commands in the history.
       my $what = arg($meta);
-      my $proc = run <<fzf -e --no-sort --layout=reverse -q "$what">>, :in, :out;
+      my $proc = run <<fzf --bind 'j:down,k:up' -e --no-sort --layout=reverse -q "$what">>, :in, :out;
       $proc.in.put($_) for $*log-file.IO.slurp.lines.reverse.unique;
       my $send = $proc.out.get or return;
       confirm-send($send, :add-to-history);
@@ -197,7 +197,7 @@ method run-meta($meta) is export {
       #= uni <text> -- Look up unicode character to output
       my $what = arg($meta);
       state $chars = (0..0x1ffff).map({chr($_) ~ ' ' ~ uniname(chr($_))});
-      my $proc = run <<fzf --no-sort --layout=reverse -q "$what">>, :in, :out;
+      my $proc = run <<fzf --bind 'j:down,k:up' --no-sort --layout=reverse -q "$what">>, :in, :out;
       $proc.in.put($_) for $chars.grep: { .fc.contains($what.fc) }
       my $send = $proc.out.slurp(:close) or return;
       my $first = $send.comb[0];
