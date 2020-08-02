@@ -53,8 +53,7 @@ start up in its own pane:
    ```
 
 I use the `.tm` suffix for my `tmeta` scripts.  If you do too, you
-might like the vim syntax file for them (in this repo).
-
+might like this [vim syntax file](syntax/tm.vim).
 
 ## What do I use it with
 
