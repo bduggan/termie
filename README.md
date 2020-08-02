@@ -153,13 +153,13 @@ Please see the [documentation](doc.md) for a complete list of commands.
 
 ## Installation
 
-Prerequisites: fzf, tmux, libreadline, perl6 and a few modules
+Prerequisites: fzf, tmux, libreadline, raku and a few modules
 
 On OS/X
 ```
 brew install fzf
 brew install tmux
-brew install perl6
+brew install rakudo
 git clone https://github.com/bduggan/tmeta
 cd tmeta
 zef install --deps-only .
