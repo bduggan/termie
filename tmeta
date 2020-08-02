@@ -5,7 +5,7 @@
 # requirements:
 #   fzf, tmux, raku, Log::Async, Readline
 
-our $VERSION = v0.0.1;
+our $VERSION = v0.0.2;
 
 use Log::Async;
 use Readline;
@@ -49,7 +49,6 @@ sub init-dynvars {
 
 sub init-log {
   @*history = $*log-file.IO.lines if $*log-file.IO.e;
-  say "Logging to $*log-file";
   $*log = open :a, $*log-file;
   $*log.out-buffer = 0;
 }
@@ -68,6 +67,7 @@ my %*SUB-MAIN-OPTS = :named-anywhere;
 multi MAIN() {
   logger.send-to($*ERR, :level( * >= DEBUG));
   init;
+  say "Welcome to tmeta v$VERSION";
   my $r = Readline.new;
   my $cmd = commands.new;
   $*readline := $r;
