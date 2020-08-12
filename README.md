@@ -87,8 +87,8 @@ Please see the [documentation](doc.md) for a complete list of commands.
   > \repeat 2
   ```
 
-  Search the command history for the last occurrence of 'User' using fzf
-  (readline keybindings work too)
+  Search the command history for the last occurrence of 'User' using [fzf](https://github.com/junegunn/fzf)
+  (readline command history works too)
   ```
   > \find User
   ```
@@ -110,7 +110,7 @@ Please see the [documentation](doc.md) for a complete list of commands.
   ```
 
   Similar, but send it to an ssh console by first tarring and base64 encoding
-  and not echoing stdout, and note that 'something' can also be a directory:0
+  and not echoing stdout, and note that 'something' can also be a directory:
   ```
   > \xfer something
   ```
