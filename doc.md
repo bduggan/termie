@@ -5,12 +5,8 @@
 In interactive mode these commands are supported:
 
 <dl>
-<dt>\alias &lt;key&gt;</dt>
-<dd>show any alias associated with &lt;key&gt;</dd>
-<dt>\alias &lt;key&gt; &lt;n&gt;</dt>
-<dd>set &lt;key&gt; to item n from history (see \last)</dd>
-<dt>\alias &lt;key&gt; &lt;str&gt;</dt>
-<dd>alias &lt;key&gt; to &lt;str&gt;</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L49">\alias</a></dt>
+<dd>&lt;key&gt; [&lt;n&gt; | &lt;str&gt;] show alias key, or set it to a str or history item</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L39">\aliases</a></dt>
 <dd>show aliases [containing a string]</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L14">\append</a></dt>
@@ -73,7 +69,7 @@ In interactive mode these commands are supported:
 <dd>Run a script</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L27">\scripts</a></dt>
 <dd>show scripts in script library</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L167">\select &lt;id&gt;</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L168">\select &lt;id&gt;</a></dt>
 <dd>send to pane &lt;id&gt; instead select &lt;id&gt; &lt;id&gt;</dd>
 <dt>\send|s &lt;file&gt;</dt>
 <dd>send a file</dd>
@@ -89,7 +85,7 @@ In interactive mode these commands are supported:
 <dd>make the command pane small</dd>
 <dt>\split</dt>
 <dd>split current pane</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L123">\stop</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L124">\stop</a></dt>
 <dd>send ^C to the current pane stop &lt;id&gt; ...</dd>
 <dt>\timing [on|off]</dt>
 <dd>turn on or off showing times in the prompt</dd>

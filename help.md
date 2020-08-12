@@ -5,9 +5,7 @@
 In interactive mode these commands are supported:
 
 ```
-     \alias <key>                    show any alias associated with <key>
-     \alias <key> <n>                set <key> to item n from history (see \last)
-     \alias <key> <str>              alias <key> to <str>
+     \alias                          <key> [<n> | <str>] show alias key, or set it to a str or history item
      \aliases <str>                  show aliases [containing a string]
      \append <n> <file>              append nth shown item to script <file>
      \await [regex]                  await the appearance of regex in the output, then stop a repeat
