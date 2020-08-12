@@ -33,7 +33,7 @@ In interactive mode these commands are supported:
 <dd>set between lines to a (decimal) value</dd>
 <dt>\do</dt>
 <dd>run a (not-shell) command and send the output slowly</dd>
-<dt>\do</dt>
+<dt>\dosh</dt>
 <dd>run a shell command and send the output (text mode, line at a time)</dd>
 <dt>\dump &lt;n&gt;</dt>
 <dd>dump n (or 3000) lines of output to a file</dd>
@@ -73,7 +73,7 @@ In interactive mode these commands are supported:
 <dd>Run a script</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commander.pm6#L27">\scripts</a></dt>
 <dd>show scripts in script library</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L166">\select &lt;id&gt;</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L167">\select &lt;id&gt;</a></dt>
 <dd>send to pane &lt;id&gt; instead select &lt;id&gt; &lt;id&gt;</dd>
 <dt>\send|s &lt;file&gt;</dt>
 <dd>send a file</dd>
@@ -89,7 +89,7 @@ In interactive mode these commands are supported:
 <dd>make the command pane small</dd>
 <dt>\split</dt>
 <dd>split current pane</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L122">\stop</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L123">\stop</a></dt>
 <dd>send ^C to the current pane stop &lt;id&gt; ...</dd>
 <dt>\timing [on|off]</dt>
 <dd>turn on or off showing times in the prompt</dd>

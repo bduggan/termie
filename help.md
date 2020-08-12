@@ -19,7 +19,7 @@ In interactive mode these commands are supported:
      \debug                          set log level to debug
      \delay [num]                    set between lines to a (decimal) value
      \do                             run a (not-shell) command and send the output slowly
-     \do                             run a shell command and send the output (text mode, line at a time)
+     \dosh                           run a shell command and send the output (text mode, line at a time)
      \dump <n>                       dump n (or 3000) lines of output to a file
      \edit                           edit a file (default /tmp/buffer)
      \enq <command>                  Enqueue a command for await (or "clear" to clear the queue).
