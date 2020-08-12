@@ -44,3 +44,22 @@ multi method aliases($meta, $str = "") {
     say .value.indent(4);
   }
 }
+
+#| <key> [<n> | <str>] show alias key, or set it to a str or history item
+proto method alias(|) {*}
+multi method alias($meta) {
+  note 'aliases: ' ~ %*aliases.keys.sort.join(' ');
+}
+multi method alias($meta, $key) {
+  note %*aliases{ $key } // 'no such alias';
+}
+multi method alias($meta, $key, Str $n where /^\d+$/ ) {
+  my $str = @*shown[$n - 1];
+  %*aliases{ $key } = $str;
+  $*alias-file.spurt: join "\n", %*aliases.kv.map: { join ': ', $^key, $^value.perl }
+}
+multi method alias($meta, $key, |) {
+  %*aliases{ $key } = $meta.subst(/^ \s* alias \s* $key /,'').trim;
+  $*alias-file.spurt: join "\n", %*aliases.kv.map: { join ': ', $^key, $^value.perl }
+}
+

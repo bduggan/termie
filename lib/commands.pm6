@@ -26,7 +26,7 @@ method generate-help($for = Nil) {
     next unless $m.name ~~ /^ <[a..z]>/;
     next if $for && $m.name !~~ / $for /;
     unless $m.WHY {
-      note "No docs for {$m.name}";
+      # note "No docs for {$m.name}";
       next;
     }
     my $desc = $m.WHY.Str.trim;
@@ -55,6 +55,8 @@ method execute($str) is export {
 
 my $grabfile = "/tmp/grabbed".IO;
 
+my @commands = <shell grep pwd eof clr append show scripts edit aliases await enq repeat alias>;
+
 method run-meta($meta) is export {
   return unless $meta.words[0];
   my $cmd = $meta.words[0];
@@ -79,7 +81,7 @@ method run-meta($meta) is export {
       %*vars{ "$<var>" } = "$<rest>";
       debug "set $<var> to $<rest>";
     }
-    when <shell grep pwd eof clr append show scripts edit aliases await enq repeat>.any {
+    when @commands.any {
       my $c = $meta.words[0];
       try self."$c"($meta, |($meta.words[1..*].map({ val($^x) })));
       with $! -> $err is copy {
@@ -290,7 +292,7 @@ method run-meta($meta) is export {
       sendit("stty echo", newline => True, :nostore);
     }
     when 'dosh' {
-      #= do -- run a shell command and send the output (text mode, line at a time)
+      #= dosh -- run a shell command and send the output (text mode, line at a time)
       my $prog = arg($meta);
       say "running $prog";
       my $proc = shell($prog, :out);
@@ -305,23 +307,6 @@ method run-meta($meta) is export {
     when 'clear' {
       #= clear -- clear this pane
       shell 'tput clear';
-    }
-    when 'alias' {
-      { #=( alias <key> -- show any alias associated with <key> ) }
-      { #=( alias <key> <n> -- set <key> to item n from history (see \last) ) }
-      { #=( alias <key> <str> -- alias <key> to <str> ) }
-      my $key = $meta.words[1] or return note 'aliases: ' ~ %*aliases.keys.sort.join(' ');
-      my $id = $meta.words[2] or
-        return note %*aliases{ $key } // 'no such alias';
-      my $str =
-        do if $id ~~ /^ \d+ $/ {
-          @*shown[$id - 1];
-        } else {
-          $meta.words[2..*].join(' ');
-        }
-      note "saving $key = {$str.perl}";
-      %*aliases{ $key } = $str;
-      $*alias-file.spurt: join "\n", %*aliases.kv.map: { join ': ', $^key, $^value.perl }
     }
     when 'help'|'h' {
       #= help -- this help
