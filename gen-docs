@@ -78,7 +78,7 @@ sub show-command($h) {
 
 unit sub MAIN(Bool :$*html, Str :$cmd = '');
 
-my @help = commands.new.generate-help();
+my @help = commands.new.generate-help($cmd);
 
 my %c = @help.classify: { $^line.<text> ~~ / ^^ \s* '\script '/ ?? 'script' !! 'interactive' };
 
@@ -102,7 +102,7 @@ say "In scripting mode, these additional commands are supported:";
 say "";
 say dl-start;
 for %c<script>.sort(*.<text>) -> $h {
-   next if $cmd && $h<text> !~~ /$cmd/;
+   next if $cmd;
    $h<text> .= subst(/script \s* /,'');
    show-command($h);
 }

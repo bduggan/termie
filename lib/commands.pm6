@@ -15,9 +15,18 @@ method generate-help($for = Nil) {
     next if $for && $pod !~~ / $for /;
     my ($cmd,$desc) = "$pod".split('--');
     next unless $desc;
+    my $line = $pod.WHEREFORE.?line;
+    my $file = $pod.WHEREFORE.?file;
+    without $file {
+      state @lines = $?FILE.words[0].IO.lines;
+      with @lines.first(:k, {.contains("$pod")}) {
+        $file = $?FILE;
+        $line = $_;
+      }
+    }
     @help.push: { text => sprintf("     \\%-30s %s",$cmd.trim,$desc.trim),
-                  file => $pod.WHEREFORE.?file,
-                  line => $pod.WHEREFORE.?line,
+                  file => $file,
+                  line => $line,
                   cmd => $cmd.trim,
                   desc => $desc.trim,
                 }
