@@ -92,7 +92,11 @@ say "";
 say dl-start;
 
 for %c<interactive>.sort(*.<text>) -> $h {
-  next if $cmd && $h<text> !~~ /$cmd/;
+  unless $h<cmd> {
+     note "missing something " ~ $h.raku;
+     next;
+  }
+  next if $cmd && $h<cmd> !~~ /$cmd/;
   show-command($h);
 }
 say dl-end;

@@ -17,6 +17,7 @@ method generate-help($for = Nil) {
     next unless $desc;
     my $line = $pod.WHEREFORE.?line;
     my $file = $pod.WHEREFORE.?file;
+    $file = Nil if $file && $file ~~ /precomp/;
     without $file {
       state @lines = $?FILE.words[0].IO.lines;
       with @lines.first(:k, {.contains("$pod")}) {
@@ -391,6 +392,7 @@ method run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@comm
   my @cmd = $cmd.words;
   given @cmd[0] {
     when 'run' {
+      #= script run <name> -- run another script in the same directory
       my $target = @cmd[1];
       my $new = $script.IO.sibling($target);
       $new.IO.e or return $tester.failed("Cannot open $new");
@@ -410,7 +412,7 @@ method run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@comm
       $*trace = @cmd[1];
     }
     when 'pause' {
-      #= pause <msg>-- show msg or 'press return to continue'
+      #= script pause <msg>-- show msg or 'press return to continue'
       my $msg = $cmd.subst('pause','').trim;
       sleep 0.3;
       prompt $msg || "press return to continue:"
@@ -444,12 +446,14 @@ method run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@comm
       $waiter.countdown = +$steps;
     }
     when 'send' {
+      { #=( script send -- send a file, abort if it cannot be sent.) }
       my $what = @cmd[1];
       $what.IO.e or return $tester.failed("could not open $what");
       sendit($what.IO.slurp, :nostore);
       $tester.passed("send $what");
     }
     when 'done' {
+      { #=( script done -- indicate that the script is done ) }
       note "Done!";
       $tester.report;
     }

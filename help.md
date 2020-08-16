@@ -32,7 +32,6 @@ In interactive mode these commands are supported:
      \n                              run command in item number n
      \newlines [on|off]              turn on or off always sending a newline
      \panes                          list panes
-     \pause <msg>                    show msg or 'press return to continue'
      \pwd                            print current (meta) working directory
      \repeat <N> <M> | <stop>        repeat the last M commands every N seconds (or stop a repeat)
      \run <script>                   Run a script
@@ -58,7 +57,11 @@ In scripting mode, these additional commands are supported:
 ```
      \buffer [lines|none]     turn on line buffering
      \color [on|off]          turn off color (i.e. filter out ansi escapes)
+     \done                    indicate that the script is done
      \emit                    emit a value matched in a wait regex
+     \pause <msg>             show msg or 'press return to continue'
+     \run <name>              run another script in the same directory
+     \send                    send a file, abort if it cannot be sent.
      \sleep X                 sleep for X seconds
      \timeout                 set a timeout
      \trace [off|on]          turn on tracing
