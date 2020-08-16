@@ -101,25 +101,25 @@ In interactive mode these commands are supported:
 In scripting mode, these additional commands are supported:
 
 <dl>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L404">\script buffer [lines|none]</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L404">\buffer [lines|none]</a></dt>
 <dd>turn on line buffering</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L400">\script color [on|off]</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L400">\color [on|off]</a></dt>
 <dd>turn off color (i.e. filter out ansi escapes)</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L465">\script emit</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L465">\emit</a></dt>
 <dd>emit a value matched in a wait regex</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L461">\script sleep X</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L461">\sleep X</a></dt>
 <dd>sleep for X seconds</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L456">\script timeout</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L456">\timeout</a></dt>
 <dd>set a timeout</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L408">\script trace [off|on]</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L408">\trace [off|on]</a></dt>
 <dd>turn on tracing</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L419">\script wait &lt;delay&gt; &lt;regex&gt;</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L419">\wait &lt;delay&gt; &lt;regex&gt;</a></dt>
 <dd>wait after &lt;delay&gt; more steps for a regex</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L420">\script wait begin &lt;regex&gt;</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L420">\wait begin &lt;regex&gt;</a></dt>
 <dd>wait for a regex until we see an end</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L421">\script wait end</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L421">\wait end</a></dt>
 <dd>end a wait begin</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L418">\script wait for &lt;regex&gt;</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L418">\wait for &lt;regex&gt;</a></dt>
 <dd>wait for a regex immediately</dd>
 </dl>
 

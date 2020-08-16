@@ -104,6 +104,7 @@ say dl-start;
 for %c<script>.sort(*.<text>) -> $h {
    next if $cmd;
    $h<text> .= subst(/script \s* /,'');
+   $h<cmd> .= subst(/script \s* /,'');
    show-command($h);
 }
 say dl-end;
