@@ -247,21 +247,11 @@ method run-meta($meta) is export {
       return note 'no options' unless @*shown;
       confirm-send(@*shown[+$<id> - 1])
     }
-    when 'send'|'s' {
-      { #=( send|s <n> -- send item number n ) }
-      { #=( send|s <file> -- send a file ) }
-      my $which = $meta.words[1] // @*shown.elems;
-      if val($which) ~~ Int {
-        if $which.IO.e {
-          return note "ambigous argument: $which is a file";
-        }
-        confirm-send(@*shown[$which - 1]);
-      } else {
-        my $file = $which;
-        return note "can't open $file" unless $file.IO.e;
-        my $contents = $file.IO.lines.grep({ not /^ \s* '#'/ }).join("\n");
-        confirm-send($contents, :big);
-      }
+    when 'send' {
+      #= send <file> -- send a file
+      my $file = $meta.words[1];
+      return note "can't open $file" unless $file.IO.e;
+      confirm-send( $file.IO.slurp , :big);
     }
     when 'do' {
       #= do -- run a (not-shell) command and send the output slowly

@@ -37,8 +37,7 @@ In interactive mode these commands are supported:
      \run <script>                   Run a script
      \scripts                        show scripts in script library
      \select <id>                    send to pane <id> instead select <id> <id>
-     \send|s <file>                  send a file
-     \send|s <n>                     send item number n
+     \send <file>                    send a file
      \set <var> <value>              set a variable for inline replacement
      \shell                          run command in a local shell
      \show                           show contents of a script
