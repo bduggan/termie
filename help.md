@@ -15,7 +15,7 @@ In interactive mode these commands are supported:
      \close                          kill the current pane
      \clr                            send a clear screen char
      \debug                          set log level to debug
-     \delay [num]                    set between lines to a (decimal) value
+     \delay [num]                    set the delay between sending lines
      \do                             run a (not-shell) command and send the output slowly
      \dosh                           run a shell command and send the output (text mode, line at a time)
      \dump <n>                       dump n (or 3000) lines of output to a file

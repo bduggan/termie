@@ -322,7 +322,7 @@ method run-meta($meta) is export {
       }
     }
     when 'delay' {
-      #= delay [num] -- set between lines to a (decimal) value
+      #= delay [num] -- set the delay between sending lines
       return say $*delay without $meta.words[1];
       $*delay = val($meta.words[1])
     }

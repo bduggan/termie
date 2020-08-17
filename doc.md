@@ -26,7 +26,7 @@ In interactive mode these commands are supported:
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L115">\debug</a></dt>
 <dd>set log level to debug</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L324">\delay [num]</a></dt>
-<dd>set between lines to a (decimal) value</dd>
+<dd>set the delay between sending lines</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L256">\do</a></dt>
 <dd>run a (not-shell) command and send the output slowly</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L294">\dosh</a></dt>
