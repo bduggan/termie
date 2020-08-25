@@ -4,6 +4,15 @@
     "perl" : "6.*",
     "build-depends" : [ ],
     "provides" : {
+         "actions" : "lib/actions.pm6",
+        "commander" : "lib/commander.pm6",
+        "commands" : "lib/commands.pm6",
+        "tester" : "lib/tester.pm6",
+        "tmux" : "lib/tmux.pm6",
+        "utils" : "lib/utils.pm6",
+        "waiter" : "lib/waiter.pm6",
+        "commander::godot" : "lib/commander/godot.pm6",
+        "commander::shellish" : "lib/commander/shellish.pm6"
     },
     "tags" : [
         ],
