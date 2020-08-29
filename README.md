@@ -159,13 +159,11 @@ On OS/X
 brew install fzf
 brew install tmux
 brew install rakudo
-git clone https://github.com/bduggan/tmeta
-cd tmeta
-zef install --deps-only .
-./tmeta
+zef install https://github.com/bduggan/tmeta.git
 ```
 
 ## See also
 
 * The [documentation](doc.md), with links to the source
 * The same [documentation](help.md) as shown by the `\help` command
+* This blog article: [https://blog.matatu.org/raku-tmeta](https://blog.matatu.org/raku-tmeta)
