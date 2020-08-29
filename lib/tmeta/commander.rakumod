@@ -25,11 +25,13 @@ method show($meta, Str $name) {
 
 #| show scripts in script library
 method scripts($meta) {
+  $script-dir.IO.e or return note "no scripts ($script-dir)";
   shell "ls $script-dir";
 }
 
 #| edit a file (default /tmp/buffer)
 method edit($meta, $name is copy = '/tmp/buffer') {
+  $script-dir.IO.d or mkdir $script-dir;
   $name = $script-dir.child($name) unless $name.IO.is-absolute;
   my $ed = %*ENV<EDITOR> // 'vim';
   my $ok = shell "$ed $name";
