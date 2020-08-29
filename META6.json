@@ -1,7 +1,7 @@
 {
     "name" : "tmeta",
     "source-url" : "https://github.com/bduggan/tmeta",
-    "perl" : "6.*",
+    "perl" : "6.d",
     "build-depends" : [ ],
     "provides" : {
         "tmeta::actions" : "lib/tmeta/actions.rakumod",
@@ -21,7 +21,7 @@
     ],
     "description" : "A console for your console",
     "test-depends" : [ ],
-    "version" : "0.0.2",
+    "version" : "0.0.3",
     "license" : "MIT",
     "authors" : [
         "Brian Duggan"
