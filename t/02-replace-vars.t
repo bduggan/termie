@@ -1,6 +1,6 @@
-use lib 'lib';
-use commands;
 use Test;
+
+use tmeta::commands;
 
 my %*vars = earth => 'world';
 

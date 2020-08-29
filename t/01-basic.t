@@ -1,12 +1,10 @@
-#!perl6
-
 use Test;
 
 plan 6;
 
-use-ok 'actions';
-use-ok 'commander';
-use-ok 'commands';
-use-ok 'tester';
-use-ok 'tmux';
-use-ok 'waiter';
+use-ok 'tmeta::actions';
+use-ok 'tmeta::commander';
+use-ok 'tmeta::commands';
+use-ok 'tmeta::tester';
+use-ok 'tmeta::tmux';
+use-ok 'tmeta::waiter';
