@@ -4,13 +4,13 @@
 #
 # requirements:
 #   fzf, tmux, raku, Log::Async, Readline
+use lib $?FILE.IO.resolve.parent.child('lib');
 
 our $VERSION = v0.0.2;
 
 use Log::Async;
 use Readline;
 
-use lib $?FILE.IO.resolve.sibling('lib');
 use actions;
 use commands;
 use tester;
