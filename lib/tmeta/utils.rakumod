@@ -1,4 +1,4 @@
-unit module utils;
+unit module tmeta::utils;
 
 sub arg($cmd) is export {
   my $wd = $cmd.words[0];

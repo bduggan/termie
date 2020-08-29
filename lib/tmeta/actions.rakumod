@@ -1,6 +1,6 @@
-unit module actions;
+unit module tmeta::actions;
 use Log::Async;
-use tmux;
+use tmeta::tmux;
 
 sub strip-color(Supply $s --> Supply) {
   supply {

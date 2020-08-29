@@ -1,13 +1,13 @@
 
-use commander;
+use tmeta::commander;
 
-unit class commands is commander;
+unit class tmeta::commands is tmeta::commander;
 use Log::Async;
-use actions;
-use waiter;
-use tester;
-use tmux;
-use utils;
+use tmeta::actions;
+use tmeta::waiter;
+use tmeta::tester;
+use tmeta::tmux;
+use tmeta::utils;
 
 method generate-help($for = Nil) {
   my @help;
@@ -192,7 +192,7 @@ method run-meta($meta) is export {
       trace "running $script";
       $script = $script-dir.child($script) unless $script.IO.f;
       $script.IO.f or return note "no such file: $script";
-      my $tester = tester.new;
+      my $tester = tmeta::tester.new;
       trace "running {$script.IO.absolute}";
       self.run-script($script, :$tester);
       $tester.report;
@@ -487,7 +487,7 @@ sub has-content($str) {
 
 method run-script($script, :$tester) is export {
   my @commands = $script.IO.lines.grep({has-content($_)});
-  my $waiter = waiter.new(timeout => +$*timeout);
+  my $waiter = tmeta::waiter.new(timeout => +$*timeout);
   my Channel $captured .= new;
   reorder(@commands);
   my $run-ahead = 0;

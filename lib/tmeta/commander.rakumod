@@ -1,12 +1,12 @@
-unit class commander;
+unit class tmeta::commander;
 
-use commander::shellish;
-use commander::godot;
-also does commander::shellish;
-also does commander::godot;
+use tmeta::commander::shellish;
+use tmeta::commander::godot;
+also does tmeta::commander::shellish;
+also does tmeta::commander::godot;
 
-use tester;
-use actions;
+use tmeta::tester;
+use tmeta::actions;
 
 our $script-dir is export = $*HOME.child('.tmeta').child('scripts');
 

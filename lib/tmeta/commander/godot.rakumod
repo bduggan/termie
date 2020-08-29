@@ -1,7 +1,7 @@
-unit role commander::godot;
-use utils;
-use tmux;
-use actions;
+unit role tmeta::commander::godot;
+use tmeta::utils;
+use tmeta::tmux;
+use tmeta::actions;
 
 # handles await-ey things
 

@@ -1,4 +1,4 @@
-unit class waiter;
+unit class tmeta::waiter;
 use Log::Async;
 
 has Promise $.promise is rw;
