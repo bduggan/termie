@@ -5,9 +5,9 @@
 In interactive mode these commands are supported:
 
 <dl>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/tmeta/commander.rakumod#L49">\alias</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/tmeta/commander.rakumod#L51">\alias</a></dt>
 <dd>&lt;key&gt; [&lt;n&gt; | &lt;str&gt;] show alias key, or set it to a str or history item</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/tmeta/commander.rakumod#L39">\aliases</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/tmeta/commander.rakumod#L41">\aliases</a></dt>
 <dd>show aliases [containing a string]</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/tmeta/commander.rakumod#L14">\append</a></dt>
 <dd>append nth shown item to script &lt;file&gt;</dd>
@@ -33,7 +33,7 @@ In interactive mode these commands are supported:
 <dd>run a shell command and send the output (text mode, line at a time)</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/tmeta/commands.rakumod#L229">\dump &lt;n&gt;</a></dt>
 <dd>dump n (or 3000) lines of output to a file</dd>
-<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/tmeta/commander.rakumod#L32">\edit</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/tmeta/commander.rakumod#L33">\edit</a></dt>
 <dd>edit a file (default /tmp/buffer)</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/tmeta/commander/godot.rakumod#L42">\enq</a></dt>
 <dd>Enqueue a command for await (or "clear" to clear the queue).</dd>
