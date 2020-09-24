@@ -162,6 +162,9 @@ brew install rakudo
 zef install https://github.com/bduggan/tmeta.git
 ```
 
+You can also install raku with [rakubrew](https://rakubrew.org)
+and then use `zef` to install tmeta.
+
 ## See also
 
 * The [documentation](doc.md), with links to the source
