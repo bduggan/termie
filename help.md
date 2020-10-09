@@ -47,6 +47,8 @@ In interactive mode these commands are supported:
      \timing [on|off]                turn on or off showing times in the prompt
      \trace                          set log level to trace
      \uni <text>                     Look up unicode character to output
+     \unwatch                        stop watching the current window+pane
+     \watch                          start watching the current window+pane by piping to a file
      \xfer [filename]                send a file or directory to the remote console
 ```
 ### Scripts
