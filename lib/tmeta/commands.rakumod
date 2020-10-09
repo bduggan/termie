@@ -336,7 +336,16 @@ method run-meta($meta) is export {
       if arg($meta) -> $setting { $*timing = ($setting eq 'on') }
       note 'showing timing is ' ~ ( $*timing ?? 'on' !! 'off' );
     }
-
+    when 'watch' {
+      #= watch -- start watching the current window+pane by piping to a file
+      my $file = tmux-start-pipe(:$*window,:$*pane);
+      note "piping $*window:$*pane to $file";
+    }
+    when 'unwatch' {
+      #= unwatch -- stop watching the current window+pane
+      tmux-stop-pipe(:$*window,:$*pane);
+      note "stopped watching $*window:$*pane";
+    }
     default {
       say "unknown command $_";
     }
