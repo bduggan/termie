@@ -65,7 +65,7 @@ my %*SUB-MAIN-OPTS = :named-anywhere;
 
 #| interactive mode
 multi MAIN() {
-  logger.send-to($*ERR, :level( * >= DEBUG));
+  logger.send-to($*ERR, :level( * >= INFO));
   init;
   say "Welcome to tmeta v$VERSION";
   my $r = Readline.new;
