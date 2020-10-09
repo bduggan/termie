@@ -28,27 +28,31 @@ sub set-up-tmux is export {
   $*window = ~( @windows[0] ~~ / <( '@' \d+ )> \s* '(active)' / );
 }
 
-sub tmux-stop-pipe is export {
+my %pipe-files;
+sub tmux-stop-pipe(:$window = $*window, :$pane = $*pane) is export {
   shell "tmux pipe-pane -t $*window.$*pane";
+  %pipe-files{ "$*window:$*pane" } = Nil
 }
 
 sub tmux-start-pipe(:$window,:$pane,:$file is copy) is export {
+  .return with %pipe-files{ "$window:$pane" };
   $file //= "/tmp/tmux-buffer-{$window}-{$pane}-{$*PID}-{now.Int}";
+  %pipe-files{ "$window:$pane" } = $file;
   shell "tmux pipe-pane -t $window.$pane 'cat >> $file'";
   trace "creating output stream for $file";
   $file;
 }
 
-sub tail($file, Bool :$new --> Supply) is export {
+sub tail($file --> Supply) is export {
   sleep 0.1;
   $file.IO.e or die "cannot tail -- no such file $file";
   supply {
     my $in = $file.IO.open;
+    $in.seek(0, SeekFromEnd);
     my $start = $in.read.decode;
-    emit $start unless $new;
     my $last = $in.tell;
     whenever $file.IO.watch -> $e {
-      debug "waiting!";
+      trace "got event $e";
       $in.seek($last) if $last;
       emit $in.read.decode;
       $last = $in.tell;
@@ -56,14 +60,14 @@ sub tail($file, Bool :$new --> Supply) is export {
   }
 }
 
-sub output-stream(:$window = $*window, :$pane = $*pane, :$buffer = $*buffer, Bool :$new) is export {
+sub output-stream(:$window = $*window, :$pane = $*pane, :$buffer = $*buffer) is export {
   # some consoles (*cough* rails *cough*) send ansi sequences instead of newlines
   # down is 'esc [ 1 B', beginning of line is 'esc [ 0 G'
   my $nl = "\x[1B][1B\x[1B][0G";
   my $file = tmux-start-pipe(:$window,:$pane);
-  return tail($file, :$new) unless $buffer eq 'lines';
+  return tail($file) unless $buffer eq 'lines';
   return supply {
-    whenever tail($file, :$new).lines -> $line {
+    whenever tail($file).lines -> $line {
       for $line.split(/$nl/) -> $piece {
         emit $piece
       }
