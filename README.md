@@ -150,6 +150,40 @@ Please see the [documentation](doc.md) for a complete list of commands.
   \cat myfile
   ```
 
+  Edit a file named session.rb, in ~/.tmeta/scripts
+  ```
+  \edit session.rb
+  ```
+
+  After running the above, add this to session.rb:
+  ```
+  irb
+
+  \expect irb(main):001:0>
+
+  "hello world"
+
+  \expect irb(main):002:0>
+
+  exit
+  ```
+
+  Now running
+  ```
+  \run session.rb
+  ```
+
+  will start the interactive ruby console (irb) and the following
+  session should take place on the top panel:
+
+  ```
+  $ irb
+  irb(main):001:0> "hello world"
+  => "hello world"
+  irb(main):002:0> exit
+  $
+  ```
+
 ## Installation
 
 Prerequisites: fzf, tmux, libreadline, raku and a few modules
