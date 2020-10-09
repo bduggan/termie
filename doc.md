@@ -90,6 +90,11 @@ In interactive mode these commands are supported:
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/tmeta/commands.rakumod#L208">\uni &lt;text&gt;</a></dt>
 <dd>Look up unicode character to output</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/tmeta/commands.rakumod#L275">\xfer [filename]</a></dt>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L344">\unwatch</a></dt>
+<dd>stop watching the current window+pane</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L339">\watch</a></dt>
+<dd>start watching the current window+pane by piping to a file</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L275">\xfer [filename]</a></dt>
 <dd>send a file or directory to the remote console</dd>
 </dl>
 <h3>Scripts</h3>
@@ -124,6 +129,34 @@ In scripting mode, these additional commands are supported:
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/tmeta/commands.rakumod#L413">\wait end</a></dt>
 <dd>end a wait begin</dd>
 <dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/tmeta/commands.rakumod#L410">\wait for &lt;regex&gt;</a></dt>
+=======
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L405">\buffer [lines|none]</a></dt>
+<dd>turn on line buffering</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L401">\color [on|off]</a></dt>
+<dd>turn off color (i.e. filter out ansi escapes)</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L454">\done</a></dt>
+<dd>indicate that the script is done</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L468">\emit</a></dt>
+<dd>emit a value matched in a wait regex</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L413">\pause &lt;msg&gt;</a></dt>
+<dd>show msg or 'press return to continue'</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L393">\run &lt;name&gt;</a></dt>
+<dd>run another script in the same directory</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L447">\send</a></dt>
+<dd>send a file, abort if it cannot be sent.</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L464">\sleep X</a></dt>
+<dd>sleep for X seconds</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L459">\timeout</a></dt>
+<dd>set a timeout</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L409">\trace [off|on]</a></dt>
+<dd>turn on tracing</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L420">\wait &lt;delay&gt; &lt;regex&gt;</a></dt>
+<dd>wait after &lt;delay&gt; more steps for a regex</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L421">\wait begin &lt;regex&gt;</a></dt>
+<dd>wait for a regex until we see an end</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L422">\wait end</a></dt>
+<dd>end a wait begin</dd>
+<dt><a href="https://github.com/bduggan/tmeta/blob/master/lib/commands.pm6#L419">\wait for &lt;regex&gt;</a></dt>
 <dd>wait for a regex immediately</dd>
 </dl>
 
