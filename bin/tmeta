@@ -76,7 +76,7 @@ multi MAIN() {
   loop {
     my $prompt = do
       if $*timing {
-        DateTime.now ~ '> ';
+        DateTime.now.hh-mm-ss ~ ' > ';
       } else {
         '> ';
       }

@@ -346,6 +346,10 @@ method run-meta($meta) is export {
       tmux-stop-pipe(:$*window,:$*pane);
       note "stopped watching $*window:$*pane";
     }
+    when 'sleep' {
+      #= sleep X -- sleep for X seconds
+      sleep arg($meta) // 1
+    }
     default {
       say "unknown command $_";
     }
@@ -460,10 +464,6 @@ method run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@comm
       #= script timeout -- set a timeout
       $*timeout = val(@cmd[1]);
       $waiter.timeout = +$*timeout;
-    }
-    when 'sleep' {
-      #= script sleep X -- sleep for X seconds
-      sleep +@cmd[1];
     }
     when 'emit' {
       #= script emit -- emit a value matched in a wait regex
