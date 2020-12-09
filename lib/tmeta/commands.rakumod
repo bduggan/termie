@@ -418,7 +418,8 @@ method run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@comm
       #= script pause <msg>-- show msg or 'press return to continue'
       my $msg = $cmd.subst('pause','').trim;
       sleep 0.3;
-      prompt $msg || "press return to continue:"
+      my $got = prompt ($msg || "press return to continue (q to abort):");
+      fail "aborted" if $got.trim eq 'q';
     }
     when 'wait' {
       { #=( script wait for <regex> -- wait for a regex immediately ) }
