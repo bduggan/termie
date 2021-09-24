@@ -23,9 +23,12 @@ method show($meta, Str $name) {
   say ($file.slurp || "$file is empty");
 }
 
-#| show scripts in script library
-method scripts($meta) {
+#| show scripts in script library, optionally search for a name
+method scripts($meta, $name = '') {
   $script-dir.IO.e or return note "no scripts ($script-dir)";
+  if $name {
+    return shell "ls $script-dir | grep $name || true";
+  }
   shell "ls $script-dir";
 }
 
