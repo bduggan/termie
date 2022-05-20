@@ -18,7 +18,7 @@ method generate-help($for = Nil) {
     my $line = $pod.WHEREFORE.?line;
     my $file = $pod.WHEREFORE.?file;
     $file = Nil if $file && $file ~~ /precomp/;
-    without $file {
+    if !$file && $?FILE.words[0].IO.e {
       state @lines = $?FILE.words[0].IO.lines;
       with @lines.first(:k, {.contains("$pod")}) {
         $file = $?FILE;
