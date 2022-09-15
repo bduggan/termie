@@ -1,5 +1,5 @@
 {
-    "name" : "tmeta",
+    "name" : "App::tmeta",
     "source-url" : "https://github.com/bduggan/tmeta",
     "raku" : "6.d",
     "build-depends" : [ ],
