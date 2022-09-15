@@ -210,7 +210,7 @@ method run-meta($meta) is export {
     when 'uni' {
       #= uni <text> -- Look up unicode character to output
       my $what = arg($meta);
-      state $chars = (0..0x1ffff).map({chr($_) ~ ' ' ~ uniname(chr($_))});
+      state $chars = (0..0x1ffff).map({chr($_) ~ '   ' ~ uniname(chr($_))});
       my $proc = run <<fzf --bind 'j:down,k:up' --no-sort --layout=reverse -q "$what">>, :in, :out;
       $proc.in.put($_) for $chars.grep: { .fc.contains($what.fc) }
       my $send = $proc.out.slurp(:close) or return;
