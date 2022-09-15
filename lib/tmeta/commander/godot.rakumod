@@ -11,7 +11,7 @@ my %repeating;
 #| [regex] -- await the appearance of regex in the output, then stop a repeat
 method await($meta, Str $what) {
   my $regex = eval-regex($meta.subst(/^ 'await' \s+ /,''));
-  say "Waiting for " ~ $regex.perl;
+  say "Waiting for " ~ $regex.raku;
   if $queued {
     say "Then I will send:";
     say $queued;
@@ -24,7 +24,7 @@ method await($meta, Str $what) {
     done if $regex ~~ Str and $l ~~ / $regex /;
     done if $l ~~ $regex;
   }
-  note "Done: saw " ~ $regex.perl;
+  note "Done: saw " ~ $regex.raku;
   my $id = "$*window.$*pane";
   with %repeating{$id} -> $repeating {
     say "stopping $id";

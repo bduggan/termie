@@ -61,10 +61,10 @@ multi method alias($meta, $key) {
 multi method alias($meta, $key, Str $n where /^\d+$/ ) {
   my $str = @*shown[$n - 1];
   %*aliases{ $key } = $str;
-  $*alias-file.spurt: join "\n", %*aliases.kv.map: { join ': ', $^key, $^value.perl }
+  $*alias-file.spurt: join "\n", %*aliases.kv.map: { join ': ', $^key, $^value.raku }
 }
 multi method alias($meta, $key, |) {
   %*aliases{ $key } = $meta.subst(/^ \s* alias \s* $key /,'').trim;
-  $*alias-file.spurt: join "\n", %*aliases.kv.map: { join ': ', $^key, $^value.perl }
+  $*alias-file.spurt: join "\n", %*aliases.kv.map: { join ': ', $^key, $^value.raku }
 }
 

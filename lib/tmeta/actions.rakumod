@@ -32,7 +32,7 @@ sub wait_for(Str $what, Channel $captured, Supply :$from --> Promise) is export 
   start {
     my $buffer;
     react whenever $from -> $l {
-      trace "considering : " ~ $l.perl;
+      trace "considering : " ~ $l.raku;
       given $buffer-method {
         when 'none' { $buffer ~= $l }
         when 'lines' { $buffer = $l }
@@ -40,9 +40,9 @@ sub wait_for(Str $what, Channel $captured, Supply :$from --> Promise) is export 
           exit note "unknown buffer method $buffer-method";
         }
       }
-      trace "buffer is " ~ $buffer.perl;
+      trace "buffer is " ~ $buffer.raku;
       if $target ~~ Str and $buffer.contains($target) {
-        debug "contains match: for {$what.perl}: {$buffer.perl}";
+        debug "contains match: for {$what.raku}: {$buffer.raku}";
         done;
       }
       if $buffer and $buffer ~~ $target {

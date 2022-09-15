@@ -1,7 +1,7 @@
 {
     "name" : "tmeta",
     "source-url" : "https://github.com/bduggan/tmeta",
-    "perl" : "6.d",
+    "raku" : "6.d",
     "build-depends" : [ ],
     "provides" : {
         "tmeta::actions" : "lib/tmeta/actions.rakumod",
