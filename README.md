@@ -15,6 +15,9 @@ Anything typed into the bottom pane is sent to the top one, but
 lines that start with a backslash are commands for `tmeta`.
 You can type `\help` to see all possible commands.
 
+(To send a literal leading backslash, either start with a
+space or start with a double backslash.)
+
 ## Why
 
 Because you get:

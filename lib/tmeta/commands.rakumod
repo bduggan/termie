@@ -56,10 +56,10 @@ method generate-help($for = Nil) {
 }
 
 method execute($str) is export {
-  if $str ~~ /^ \\ $<rest>=[.*] $ / {
+  if $str ~~ /^ \\ <!before \\> $<rest>=[.*] $ / {
     self.run-meta("$<rest>");
   } else {
-    sendit($str);
+    sendit($str.starts-with(Q[\\]) ?? $str.subst(Q[\\], Q[\] ) !! $str); # leading \\ becomes \
   }
 }
 
