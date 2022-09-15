@@ -6,7 +6,7 @@
 #   fzf, tmux, raku, Log::Async, Readline
 use lib $?FILE.IO.resolve.parent.sibling('lib');
 
-our $VERSION = v0.0.4;
+our $VERSION = v0.1.0;
 
 use Log::Async;
 use Readline;
