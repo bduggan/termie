@@ -9,6 +9,8 @@ use tmeta::tester;
 use tmeta::tmux;
 use tmeta::utils;
 
+constant MAX_TMUX_LINE_LENGTH = 200;
+
 method generate-help($for = Nil) {
   my @help;
   for $=pod<>.sort -> $pod {
@@ -368,7 +370,12 @@ sub confirm-send($str, Bool :$big, Bool :$add-to-history = False) {
   return if $ok ~~ /:i [ q | e ]/;
   if ($big) {
     for $str.lines -> $l {
-      sendit($l, :nostore);
+      if $l.chars > MAX_TMUX_LINE_LENGTH {
+        sendit($_, :nostore, :!newline) for $l.comb(MAX_TMUX_LINE_LENGTH);
+        sendit("", :nostore, :newline);
+      } else {
+        sendit($l, :nostore);
+      }
       sleep $*delay;
     }
   } else {
