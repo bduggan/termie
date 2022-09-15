@@ -25,5 +25,6 @@
     "license" : "MIT",
     "authors" : [
         "Brian Duggan"
-    ]
+    ],
+    "auth" : "zef:bduggan"
 }
