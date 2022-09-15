@@ -46,7 +46,7 @@ sub wait_for(Str $what, Channel $captured, Supply :$from --> Promise) is export 
         done;
       }
       if $buffer and $buffer ~~ $target {
-        debug "match: for {$what.perl}: {$buffer.perl}";
+        debug "match: for {$what.raku}: {$buffer.raku}";
         my $m = $/.clone;
         trace "captured " ~ ( $m.gist.subst(/\n/,',',:g) );
         $captured.send: $m;
