@@ -68,7 +68,7 @@ terminal sessions, whatever
 
 ## More documentation
 
-Please see the [documentation](doc.md) for a complete list of commands.
+Please see the [documentation](https://github.com/bduggan/tmeta/blob/master/doc.md) for a complete list of commands.
 
 ## Examples
 
@@ -204,6 +204,6 @@ and then use `zef` to install tmeta.
 
 ## See also
 
-* The [documentation](doc.md), with links to the source
-* The same [documentation](help.md) as shown by the `\help` command
+* The [documentation](https://github.com/bduggan/tmeta/blob/master/doc.md), with links to the source
+* The same [documentation](https://github.com/bduggan/tmeta/blob/master/help.md) as shown by the `\help` command
 * This blog article: [https://blog.matatu.org/raku-tmeta](https://blog.matatu.org/raku-tmeta)
