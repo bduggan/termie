@@ -2,8 +2,6 @@
 
 A console for your console
 
-[![Build Status](https://travis-ci.org/bduggan/boda.svg?branch=master)](https://travis-ci.org/bduggan/boda)
-
 ![image](https://user-images.githubusercontent.com/58956/89128554-6e741000-d4c4-11ea-846a-32189f23900c.png)
 
 ## Description
