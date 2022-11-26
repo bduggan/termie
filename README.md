@@ -6,7 +6,7 @@ A console for your console
 
 ## Description
 
-boda (formerly boda) is a wrapper for tmux that supports
+boda (formerly tmeta) is a wrapper for tmux that supports
 sending and receiving data to/from tmux panes.
 
 Anything typed into the bottom pane is sent to the top one, but
