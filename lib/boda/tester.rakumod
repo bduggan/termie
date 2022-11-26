@@ -1,4 +1,4 @@
-unit class tmeta::tester;
+unit class boda::tester;
 
 has $.count = 0;
 has $.passes = 0;

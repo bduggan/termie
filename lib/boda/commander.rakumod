@@ -1,14 +1,14 @@
-unit class tmeta::commander;
+unit class boda::commander;
 
-use tmeta::commander::shellish;
-use tmeta::commander::godot;
-also does tmeta::commander::shellish;
-also does tmeta::commander::godot;
+use boda::commander::shellish;
+use boda::commander::godot;
+also does boda::commander::shellish;
+also does boda::commander::godot;
 
-use tmeta::tester;
-use tmeta::actions;
+use boda::tester;
+use boda::actions;
 
-our $script-dir is export = $*HOME.child('.tmeta').child('scripts');
+our $script-dir is export = $*HOME.child('.boda').child('scripts');
 
 #| <n> <file> -- append nth shown item to script <file>
 method append($meta, Int $n, Str $file) {

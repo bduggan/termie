@@ -9,9 +9,9 @@ export PS1='findthisprompt'
 \expect findthisprompt
 
 # let's send something
-echo 'echo hi' > /tmp/output.tmeta-test.txt
+echo 'echo hi' > /tmp/output.boda-test.txt
 \cd /tmp
-\send /tmp/output.tmeta-test.txt
+\send /tmp/output.boda-test.txt
 
 echo 'still going'
 export PS1=$TMP

@@ -35,12 +35,13 @@ In interactive mode these commands are supported:
      \pwd                            print current (meta) working directory
      \repeat <N> <M> | <stop>        repeat the last M commands every N seconds (or stop a repeat)
      \run <script>                   Run a script
-     \scripts                        show scripts in script library
+     \scripts                        show scripts in script library, optionally search for a name
      \select <id>                    send to pane <id> instead select <id> <id>
      \send <file>                    send a file
      \set <var> <value>              set a variable for inline replacement
      \shell                          run command in a local shell
      \show                           show contents of a script
+     \sleep X                        sleep for X seconds
      \small                          make the command pane small
      \split                          split current pane
      \stop                           send ^C to the current pane stop <id> ...
@@ -63,7 +64,6 @@ In scripting mode, these additional commands are supported:
      \pause <msg>             show msg or 'press return to continue'
      \run <name>              run another script in the same directory
      \send                    send a file, abort if it cannot be sent.
-     \sleep X                 sleep for X seconds
      \timeout                 set a timeout
      \trace [off|on]          turn on tracing
      \wait <delay> <regex>    wait after <delay> more steps for a regex

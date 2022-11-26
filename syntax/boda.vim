@@ -1,5 +1,5 @@
 " Vim syntax file
-" Language: tm tmeta
+" Language: boda
 " Maintainer: Brian Duggan
 " Latest Revision: 26 February 2019
 
@@ -11,10 +11,10 @@ if exists("b:current_syntax")
   finish
 endif
 
-syntax match TMComment /^\#.*$/
-syntax match TMIdentifier /\\=\w\+/
-syntax match TMStatement   /^\\[^=].*$/
+syntax match BodaComment /^\#.*$/
+syntax match BodaIdentifier /\\=\w\+/
+syntax match BodaStatement   /^\\[^=].*$/
 
-hi def link TMStatement Statement
-hi def link TMIdentifier Identifier
-hi def link TMComment Comment
+hi def link BodaStatement Statement
+hi def link BodaIdentifier Identifier
+hi def link BodaComment Comment

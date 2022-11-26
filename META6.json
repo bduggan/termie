@@ -1,18 +1,18 @@
 {
-    "name" : "App::tmeta",
-    "source-url" : "https://github.com/bduggan/tmeta",
+    "name" : "App::boda",
+    "source-url" : "https://github.com/bduggan/boda",
     "raku" : "6.d",
     "build-depends" : [ ],
     "provides" : {
-        "tmeta::actions" : "lib/tmeta/actions.rakumod",
-        "tmeta::commander" : "lib/tmeta/commander.rakumod",
-        "tmeta::commands" : "lib/tmeta/commands.rakumod",
-        "tmeta::tester" : "lib/tmeta/tester.rakumod",
-        "tmeta::tmux" : "lib/tmeta/tmux.rakumod",
-        "tmeta::utils" : "lib/tmeta/utils.rakumod",
-        "tmeta::waiter" : "lib/tmeta/waiter.rakumod",
-        "tmeta::commander::godot" : "lib/tmeta/commander/godot.rakumod",
-        "tmeta::commander::shellish" : "lib/tmeta/commander/shellish.rakumod"
+        "boda::actions" : "lib/boda/actions.rakumod",
+        "boda::commander" : "lib/boda/commander.rakumod",
+        "boda::commands" : "lib/boda/commands.rakumod",
+        "boda::tester" : "lib/boda/tester.rakumod",
+        "boda::tmux" : "lib/boda/tmux.rakumod",
+        "boda::utils" : "lib/boda/utils.rakumod",
+        "boda::waiter" : "lib/boda/waiter.rakumod",
+        "boda::commander::godot" : "lib/boda/commander/godot.rakumod",
+        "boda::commander::shellish" : "lib/boda/commander/shellish.rakumod"
     },
     "tags" : [
         ],

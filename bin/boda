@@ -1,6 +1,6 @@
 #!/usr/bin/env raku
 
-# tmeta
+# boda
 #
 # requirements:
 #   fzf, tmux, raku, Log::Async, Readline
@@ -11,10 +11,10 @@ our $VERSION = v0.1.1;
 use Log::Async;
 use Readline;
 
-use tmeta::actions;
-use tmeta::commands;
-use tmeta::tester;
-use tmeta::tmux;
+use boda::actions;
+use boda::commands;
+use boda::tester;
+use boda::tmux;
 
 sub init(Bool :$do-log = True) {
   set-up-tmux;
@@ -40,7 +40,7 @@ sub init-dynvars {
   $*trace = 'off';
   $*greplines = 3000;
   $*newlines = True;
-  my $base = $*HOME.child('.tmeta');
+  my $base = $*HOME.child('.boda');
   .d or .mkdir with $base.IO;
   $*log-file = $base.child('log');
   $*rl-history-file = $base.child('log-rl');
@@ -67,9 +67,9 @@ my %*SUB-MAIN-OPTS = :named-anywhere;
 multi MAIN() {
   logger.send-to($*ERR, :level( * >= INFO));
   init;
-  say "Welcome to tmeta v$VERSION";
+  say "Welcome to boda v$VERSION";
   my $r = Readline.new;
-  my $cmd = tmeta::commands.new;
+  my $cmd = boda::commands.new;
   $*readline := $r;
   $r.using-history;
   $r.read-history(~$*rl-history-file);
@@ -111,8 +111,8 @@ multi MAIN(
     logger.send-to($*ERR, :level(* >= ERROR));
   }
   init(:!do-log);
-  my $tester = tmeta::tester.new;
-  my $cmd = tmeta::commands.new;
+  my $tester = boda::tester.new;
+  my $cmd = boda::commands.new;
   $cmd.run-script($script, :$tester);
   $tester.complete;
   $tester.report if $report
@@ -132,7 +132,7 @@ multi MAIN('help') {
 
 #| List all the interactive commands
 multi MAIN('commands') {
-  my $cmd = tmeta::commands.new;
+  my $cmd = boda::commands.new;
   for $cmd.generate-help().sort(*.<cmd>) {
     next if .<text> ~~ / ^^ \s* \\ script /;
     say .<text>;

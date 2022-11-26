@@ -1,4 +1,4 @@
-unit module tmeta::utils;
+unit module boda::utils;
 
 sub arg($cmd) is export {
   my $wd = $cmd.words[0];

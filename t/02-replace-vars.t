@@ -1,6 +1,6 @@
 use Test;
 
-use tmeta::commands;
+use boda::commands;
 
 my %*vars = earth => 'world';
 

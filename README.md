@@ -1,18 +1,18 @@
-# tmeta
+# boda
 
 A console for your console
 
-[![Build Status](https://travis-ci.org/bduggan/tmeta.svg?branch=master)](https://travis-ci.org/bduggan/tmeta)
+[![Build Status](https://travis-ci.org/bduggan/boda.svg?branch=master)](https://travis-ci.org/bduggan/boda)
 
 ![image](https://user-images.githubusercontent.com/58956/89128554-6e741000-d4c4-11ea-846a-32189f23900c.png)
 
 ## Description
 
-tmeta is a wrapper for tmux that supports
+boda (formerly boda) is a wrapper for tmux that supports
 sending and receiving data to/from tmux panes.
 
 Anything typed into the bottom pane is sent to the top one, but
-lines that start with a backslash are commands for `tmeta`.
+lines that start with a backslash are commands for `boda`.
 You can type `\help` to see all possible commands.
 
 (To send a literal leading backslash, either start with a
@@ -35,32 +35,32 @@ Because you get:
 
 See below for installation.
 
-There are a few different ways to start `tmeta`.
+There are a few different ways to start `boda`.
 
-1. Start `tmux` yourself, then have `tmeta` split a window and
+1. Start `tmux` yourself, then have `boda` split a window and
 start up in its own pane:
    ```
    $ tmux
-   $ tmeta
+   $ boda
    ```
 
-2. Let `tmeta` start tmux for you:
+2. Let `boda` start tmux for you:
   ```
-  $ tmeta
+  $ boda
   ```
 
-3. Run a tmeta script.  This will split and run in another pane.
+3. Run a boda script.  This will split and run in another pane.
    ```
    $ tmux
-   $ tmeta script.tm
+   $ boda script.boda
    ```
 
-I use the `.tm` suffix for my `tmeta` scripts.  If you do too, you
-might like this [vim syntax file](syntax/tm.vim).
+I use the `.boda` suffix for my `boda` scripts.  If you do too, you
+might like this [vim syntax file](syntax/boda.vim).
 
 ## What do I use it with
 
-tmeta plays well with REPLs, or any console based
+boda plays well with REPLs, or any console based
 application that uses a tty.  For instance, docker, rails
 console, interactive ruby shell, the python debugger, the
 jupyter console, psql, mysql, regular ssh sessions, local
@@ -153,7 +153,7 @@ Please see the [documentation](https://github.com/bduggan/tmeta/blob/master/doc.
   \cat myfile
   ```
 
-  Edit a file named session.rb, in ~/.tmeta/scripts
+  Edit a file named session.rb, in ~/.boda/scripts
   ```
   \edit session.rb
   ```
@@ -196,14 +196,14 @@ On OS/X
 brew install fzf
 brew install tmux
 brew install rakudo
-zef install https://github.com/bduggan/tmeta.git
+zef install https://github.com/bduggan/boda.git
 ```
 
 You can also install raku with [rakubrew](https://rakubrew.org)
-and then use `zef` to install tmeta.
+and then use `zef` to install boda.
 
 ## See also
 
-* The [documentation](https://github.com/bduggan/tmeta/blob/master/doc.md), with links to the source
-* The same [documentation](https://github.com/bduggan/tmeta/blob/master/help.md) as shown by the `\help` command
+* The [documentation](https://github.com/bduggan/boda/blob/master/doc.md), with links to the source
+* The same [documentation](https://github.com/bduggan/boda/blob/master/help.md) as shown by the `\help` command
 * This blog article: [https://blog.matatu.org/raku-tmeta](https://blog.matatu.org/raku-tmeta)

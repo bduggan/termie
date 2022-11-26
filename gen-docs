@@ -1,10 +1,10 @@
 #!/usr/bin/env raku
 
 use lib 'lib';
-use tmeta::commands;
+use boda::commands;
 
 sub to-url(Str $file,Int $line) {
-  'https://github.com/bduggan/tmeta/blob/master/'
+  'https://github.com/bduggan/boda/blob/master/'
     ~ $file
     ~ '#L'
     ~ $line;
@@ -78,7 +78,7 @@ sub show-command($h) {
 
 unit sub MAIN(Bool :$*html, Str :$cmd = '');
 
-my @help = tmeta::commands.new.generate-help($cmd);
+my @help = boda::commands.new.generate-help($cmd);
 
 my %c = @help.classify: { $^line.<text> ~~ / ^^ \s* '\script '/ ?? 'script' !! 'interactive' };
 

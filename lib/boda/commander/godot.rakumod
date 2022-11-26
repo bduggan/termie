@@ -1,7 +1,7 @@
-unit role tmeta::commander::godot;
-use tmeta::utils;
-use tmeta::tmux;
-use tmeta::actions;
+unit role boda::commander::godot;
+use boda::utils;
+use boda::tmux;
+use boda::actions;
 
 # handles await-ey things
 

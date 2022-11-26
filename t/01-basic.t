@@ -2,9 +2,9 @@ use Test;
 
 plan 6;
 
-use-ok 'tmeta::actions';
-use-ok 'tmeta::commander';
-use-ok 'tmeta::commands';
-use-ok 'tmeta::tester';
-use-ok 'tmeta::tmux';
-use-ok 'tmeta::waiter';
+use-ok 'boda::actions';
+use-ok 'boda::commander';
+use-ok 'boda::commands';
+use-ok 'boda::tester';
+use-ok 'boda::tmux';
+use-ok 'boda::waiter';
