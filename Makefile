@@ -1,5 +1,5 @@
 test:
-	prove -v -e bin/boda t/boda/*.boda
+	prove -v -e bin/termie t/termie/*.termie
 
 docs:
 	./gen-docs > help.md

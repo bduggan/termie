@@ -1,13 +1,13 @@
 
-use boda::commander;
+use termie::commander;
 
-unit class boda::commands is boda::commander;
+unit class termie::commands is termie::commander;
 use Log::Async;
-use boda::actions;
-use boda::waiter;
-use boda::tester;
-use boda::tmux;
-use boda::utils;
+use termie::actions;
+use termie::waiter;
+use termie::tester;
+use termie::tmux;
+use termie::utils;
 
 constant MAX_TMUX_LINE_LENGTH = 200;
 
@@ -194,7 +194,7 @@ method run-meta($meta) is export {
       trace "running $script";
       $script = $script-dir.child($script) unless $script.IO.f;
       $script.IO.f or return note "no such file: $script";
-      my $tester = boda::tester.new;
+      my $tester = termie::tester.new;
       trace "running {$script.IO.absolute}";
       self.run-script($script, :$tester);
       $tester.report;
@@ -504,7 +504,7 @@ sub has-content($str) {
 
 method run-script($script, :$tester) is export {
   my @commands = $script.IO.lines.grep({has-content($_)});
-  my $waiter = boda::waiter.new(timeout => +$*timeout);
+  my $waiter = termie::waiter.new(timeout => +$*timeout);
   my Channel $captured .= new;
   reorder(@commands);
   my $run-ahead = 0;

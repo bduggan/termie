@@ -1,4 +1,4 @@
-unit module boda::utils;
+unit module termie::utils;
 
 sub arg($cmd) is export {
   my $wd = $cmd.words[0];

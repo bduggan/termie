@@ -1,6 +1,6 @@
 #!/usr/bin/env raku
 
-# boda
+# termie
 #
 # requirements:
 #   fzf, tmux, raku, Log::Async, Readline
@@ -11,10 +11,10 @@ our $VERSION = v0.1.1;
 use Log::Async;
 use Readline;
 
-use boda::actions;
-use boda::commands;
-use boda::tester;
-use boda::tmux;
+use termie::actions;
+use termie::commands;
+use termie::tester;
+use termie::tmux;
 
 sub init(Bool :$do-log = True) {
   set-up-tmux;
@@ -40,7 +40,7 @@ sub init-dynvars {
   $*trace = 'off';
   $*greplines = 3000;
   $*newlines = True;
-  my $base = $*HOME.child('.boda');
+  my $base = $*HOME.child('.termie');
   .d or .mkdir with $base.IO;
   $*log-file = $base.child('log');
   $*rl-history-file = $base.child('log-rl');
@@ -67,9 +67,9 @@ my %*SUB-MAIN-OPTS = :named-anywhere;
 multi MAIN() {
   logger.send-to($*ERR, :level( * >= INFO));
   init;
-  say "Welcome to boda v$VERSION";
+  say "Welcome to termie v$VERSION";
   my $r = Readline.new;
-  my $cmd = boda::commands.new;
+  my $cmd = termie::commands.new;
   $*readline := $r;
   $r.using-history;
   $r.read-history(~$*rl-history-file);
@@ -111,8 +111,8 @@ multi MAIN(
     logger.send-to($*ERR, :level(* >= ERROR));
   }
   init(:!do-log);
-  my $tester = boda::tester.new;
-  my $cmd = boda::commands.new;
+  my $tester = termie::tester.new;
+  my $cmd = termie::commands.new;
   $cmd.run-script($script, :$tester);
   $tester.complete;
   $tester.report if $report
@@ -132,7 +132,7 @@ multi MAIN('help') {
 
 #| List all the interactive commands
 multi MAIN('commands') {
-  my $cmd = boda::commands.new;
+  my $cmd = termie::commands.new;
   for $cmd.generate-help().sort(*.<cmd>) {
     next if .<text> ~~ / ^^ \s* \\ script /;
     say .<text>;

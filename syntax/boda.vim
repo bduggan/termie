@@ -1,5 +1,5 @@
 " Vim syntax file
-" Language: boda
+" Language: termie
 " Maintainer: Brian Duggan
 " Latest Revision: 26 February 2019
 

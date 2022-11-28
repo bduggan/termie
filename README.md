@@ -1,4 +1,4 @@
-# boda
+# termie
 
 A console for your console
 
@@ -6,11 +6,11 @@ A console for your console
 
 ## Description
 
-boda (formerly tmeta) is a wrapper for tmux that supports
+termie (formerly tmeta) is a wrapper for tmux that supports
 sending and receiving data to/from tmux panes.
 
 Anything typed into the bottom pane is sent to the top one, but
-lines that start with a backslash are commands for `boda`.
+lines that start with a backslash are commands for `termie`.
 You can type `\help` to see all possible commands.
 
 (To send a literal leading backslash, either start with a
@@ -33,32 +33,32 @@ Because you get:
 
 See below for installation.
 
-There are a few different ways to start `boda`.
+There are a few different ways to start `termie`.
 
-1. Start `tmux` yourself, then have `boda` split a window and
+1. Start `tmux` yourself, then have `termie` split a window and
 start up in its own pane:
    ```
    $ tmux
-   $ boda
+   $ termie
    ```
 
-2. Let `boda` start tmux for you:
+2. Let `termie` start tmux for you:
   ```
-  $ boda
+  $ termie
   ```
 
-3. Run a boda script.  This will split and run in another pane.
+3. Run a termie script.  This will split and run in another pane.
    ```
    $ tmux
-   $ boda script.boda
+   $ termie script.termie
    ```
 
-I use the `.boda` suffix for my `boda` scripts.  If you do too, you
-might like this [vim syntax file](syntax/boda.vim).
+I use the `.termie` suffix for my `termie` scripts.  If you do too, you
+might like this [vim syntax file](syntax/termie.vim).
 
 ## What do I use it with
 
-boda plays well with REPLs, or any console based
+termie plays well with REPLs, or any console based
 application that uses a tty.  For instance, docker, rails
 console, interactive ruby shell, the python debugger, the
 jupyter console, psql, mysql, regular ssh sessions, local
@@ -151,7 +151,7 @@ Please see the [documentation](https://github.com/bduggan/tmeta/blob/master/doc.
   \cat myfile
   ```
 
-  Edit a file named session.rb, in ~/.boda/scripts
+  Edit a file named session.rb, in ~/.termie/scripts
   ```
   \edit session.rb
   ```
@@ -194,14 +194,14 @@ On OS/X
 brew install fzf
 brew install tmux
 brew install rakudo
-zef install https://github.com/bduggan/boda.git
+zef install https://github.com/bduggan/termie.git
 ```
 
 You can also install raku with [rakubrew](https://rakubrew.org)
-and then use `zef` to install boda.
+and then use `zef` to install termie.
 
 ## See also
 
-* The [documentation](https://github.com/bduggan/boda/blob/master/doc.md), with links to the source
-* The same [documentation](https://github.com/bduggan/boda/blob/master/help.md) as shown by the `\help` command
+* The [documentation](https://github.com/bduggan/termie/blob/master/doc.md), with links to the source
+* The same [documentation](https://github.com/bduggan/termie/blob/master/help.md) as shown by the `\help` command
 * This blog article: [https://blog.matatu.org/raku-tmeta](https://blog.matatu.org/raku-tmeta)

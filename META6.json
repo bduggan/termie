@@ -1,18 +1,18 @@
 {
-    "name" : "App::boda",
-    "source-url" : "https://github.com/bduggan/boda",
+    "name" : "App::termie",
+    "source-url" : "https://github.com/bduggan/termie",
     "raku" : "6.d",
     "build-depends" : [ ],
     "provides" : {
-        "boda::actions" : "lib/boda/actions.rakumod",
-        "boda::commander" : "lib/boda/commander.rakumod",
-        "boda::commands" : "lib/boda/commands.rakumod",
-        "boda::tester" : "lib/boda/tester.rakumod",
-        "boda::tmux" : "lib/boda/tmux.rakumod",
-        "boda::utils" : "lib/boda/utils.rakumod",
-        "boda::waiter" : "lib/boda/waiter.rakumod",
-        "boda::commander::godot" : "lib/boda/commander/godot.rakumod",
-        "boda::commander::shellish" : "lib/boda/commander/shellish.rakumod"
+        "termie::actions" : "lib/termie/actions.rakumod",
+        "termie::commander" : "lib/termie/commander.rakumod",
+        "termie::commands" : "lib/termie/commands.rakumod",
+        "termie::tester" : "lib/termie/tester.rakumod",
+        "termie::tmux" : "lib/termie/tmux.rakumod",
+        "termie::utils" : "lib/termie/utils.rakumod",
+        "termie::waiter" : "lib/termie/waiter.rakumod",
+        "termie::commander::godot" : "lib/termie/commander/godot.rakumod",
+        "termie::commander::shellish" : "lib/termie/commander/shellish.rakumod"
     },
     "tags" : [
         ],

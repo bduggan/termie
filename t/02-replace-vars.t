@@ -1,6 +1,6 @@
 use Test;
 
-use boda::commands;
+use termie::commands;
 
 my %*vars = earth => 'world';
 

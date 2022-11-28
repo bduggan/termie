@@ -2,9 +2,9 @@ use Test;
 
 plan 6;
 
-use-ok 'boda::actions';
-use-ok 'boda::commander';
-use-ok 'boda::commands';
-use-ok 'boda::tester';
-use-ok 'boda::tmux';
-use-ok 'boda::waiter';
+use-ok 'termie::actions';
+use-ok 'termie::commander';
+use-ok 'termie::commands';
+use-ok 'termie::tester';
+use-ok 'termie::tmux';
+use-ok 'termie::waiter';

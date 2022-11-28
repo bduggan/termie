@@ -1,4 +1,4 @@
-unit role boda::commander::shellish;
+unit role termie::commander::shellish;
 
 sub arg($cmd) {
   my $wd = $cmd.words[0];

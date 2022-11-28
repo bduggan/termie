@@ -1,4 +1,4 @@
-unit module boda::tmux;
+unit module termie::tmux;
 use Log::Async;
 
 sub tmux-list is export {

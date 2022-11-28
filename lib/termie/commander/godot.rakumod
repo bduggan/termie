@@ -1,7 +1,7 @@
-unit role boda::commander::godot;
-use boda::utils;
-use boda::tmux;
-use boda::actions;
+unit role termie::commander::godot;
+use termie::utils;
+use termie::tmux;
+use termie::actions;
 
 # handles await-ey things
 

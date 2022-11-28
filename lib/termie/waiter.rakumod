@@ -1,4 +1,4 @@
-unit class boda::waiter;
+unit class termie::waiter;
 use Log::Async;
 
 has Promise $.promise is rw;

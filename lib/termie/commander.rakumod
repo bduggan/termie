@@ -1,14 +1,14 @@
-unit class boda::commander;
+unit class termie::commander;
 
-use boda::commander::shellish;
-use boda::commander::godot;
-also does boda::commander::shellish;
-also does boda::commander::godot;
+use termie::commander::shellish;
+use termie::commander::godot;
+also does termie::commander::shellish;
+also does termie::commander::godot;
 
-use boda::tester;
-use boda::actions;
+use termie::tester;
+use termie::actions;
 
-our $script-dir is export = $*HOME.child('.boda').child('scripts');
+our $script-dir is export = $*HOME.child('.termie').child('scripts');
 
 #| <n> <file> -- append nth shown item to script <file>
 method append($meta, Int $n, Str $file) {

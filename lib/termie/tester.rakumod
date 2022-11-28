@@ -1,4 +1,4 @@
-unit class boda::tester;
+unit class termie::tester;
 
 has $.count = 0;
 has $.passes = 0;
