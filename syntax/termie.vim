@@ -11,10 +11,10 @@ if exists("b:current_syntax")
   finish
 endif
 
-syntax match BodaComment /^\#.*$/
-syntax match BodaIdentifier /\\=\w\+/
-syntax match BodaStatement   /^\\[^=].*$/
+syntax match TermieComment /^\#.*$/
+syntax match TermieIdentifier /\\=\w\+/
+syntax match TermieStatement   /^\\[^=].*$/
 
-hi def link BodaStatement Statement
-hi def link BodaIdentifier Identifier
-hi def link BodaComment Comment
+hi def link TermieStatement Statement
+hi def link TermieIdentifier Identifier
+hi def link TermieComment Comment
