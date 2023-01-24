@@ -339,9 +339,10 @@ method run-meta($meta) is export {
       note 'showing timing is ' ~ ( $*timing ?? 'on' !! 'off' );
     }
     when 'watch' {
-      #= watch -- start watching the current window+pane by piping to a file
-      my $file = tmux-start-pipe(:$*window,:$*pane);
-      note "piping $*window:$*pane to $file";
+      #= watch [filename] -- start watching the current window+pane by piping to a file
+      my $file = arg($meta);
+      my $filename = tmux-start-pipe(:$*window,:$*pane, :$file);
+      note "piping $*window:$*pane to $filename";
     }
     when 'unwatch' {
       #= unwatch -- stop watching the current window+pane
