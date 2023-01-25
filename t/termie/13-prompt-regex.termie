@@ -1,5 +1,4 @@
-TMP=$PS1
-export PS1="$ "
+PS1='$ ' /bin/bash --norc
 
 true
 \expect /^^ '$' /
@@ -7,4 +6,4 @@ true
 sleep 0.1
 \expect /^^ '$' /
 
-export PS1=$TMP
+exit

@@ -1,3 +1,5 @@
+PS1='$ ' /bin/bash --norc
+
 \buffer lines
 
 rm -f /tmp/output
@@ -13,3 +15,4 @@ is ...
 
 cat /tmp/output
 \expect my name is bduggan, what is yours?
+exit
