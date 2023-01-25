@@ -2,15 +2,6 @@ unit module Termie::Actions;
 use Log::Async;
 use Termie::Tmux;
 
-sub strip-color(Supply $s --> Supply) {
-  supply {
-    whenever $s -> $line is copy {
-        $line ~~ s:g/ \x1b '[' <[0..9;]>* <[a..zA..Z]> //;
-        emit($line);
-    }
-  }
-}
-
 sub eval-regex(Str $in) is export {
   given $in {
     when / ^ '/' / {

@@ -410,10 +410,6 @@ method run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@comm
       debug "running $new";
       self.run-script($new, :$tester); 
     }
-    when 'color' {
-      #= script color [on|off] -- turn off color (i.e. filter out ansi escapes)
-      $*color = @cmd[1];
-    }
     when 'buffer' {
       #= script buffer [lines|none] -- turn on line buffering
       $*buffer = @cmd[1];

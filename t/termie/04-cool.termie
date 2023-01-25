@@ -1,6 +1,5 @@
 \delay 0.5
 \trace on
-\color strip
 seq 2
 sleep 2
 echo -n fin; echo ished
