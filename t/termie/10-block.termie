@@ -1,5 +1,6 @@
+PS1='$ ' /bin/bash --norc
+
 \buffer lines
-\color strip
 echo épées > /tmp/out
 
 \wait 2 épées 
@@ -10,3 +11,6 @@ cat /tmp/out
 echo not yet
 cat /tmp/out
 \wait end
+
+exit
+

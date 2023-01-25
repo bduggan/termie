@@ -23,7 +23,7 @@ sub init(Bool :$do-log = True) {
   init-log if $do-log;
 }
 
-my ($*timeout, $*delay, $*color, $*trace, $*newlines, $*timing);
+my ($*timeout, $*delay, $*trace, $*newlines, $*timing);
 my ($*log, $*log-file, $*rl-history-file, @*history, @*shown);
 my (%*aliases, $*alias-file);
 my ($*pane, $*window);
@@ -36,7 +36,6 @@ my $*readline;
 sub init-dynvars {
   $*timeout = 5;
   $*delay = 0.1;
-  $*color = 'allow';
   $*trace = 'off';
   $*greplines = 3000;
   $*newlines = True;

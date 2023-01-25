@@ -1,9 +1,7 @@
-\color strip
+PS1='findthisprompt' /bin/bash --norc
 
 # some comments here
 echo hello
-TMP=$PS1
-export PS1='findthisprompt'
 
 # and here, too
 \expect findthisprompt
@@ -14,4 +12,6 @@ echo 'echo hi' > /tmp/output.termie-test.txt
 \send /tmp/output.termie-test.txt
 
 echo 'still going'
-export PS1=$TMP
+
+exit
+
