@@ -2,9 +2,9 @@ use Test;
 
 plan 6;
 
-use-ok 'termie::actions';
-use-ok 'termie::commander';
-use-ok 'termie::commands';
-use-ok 'termie::tester';
-use-ok 'termie::tmux';
-use-ok 'termie::waiter';
+use-ok 'Termie::Actions';
+use-ok 'Termie::Commander';
+use-ok 'Termie::Commands';
+use-ok 'Termie::Tester';
+use-ok 'Termie::Tmux';
+use-ok 'Termie::Waiter';

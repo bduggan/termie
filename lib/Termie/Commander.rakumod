@@ -1,12 +1,12 @@
-unit class termie::commander;
+unit class Termie::Commander;
 
-use termie::commander::shellish;
-use termie::commander::godot;
-also does termie::commander::shellish;
-also does termie::commander::godot;
+use Termie::Commander::Shellish;
+use Termie::Commander::Godot;
+also does Termie::Commander::Shellish;
+also does Termie::Commander::Godot;
 
-use termie::tester;
-use termie::actions;
+use Termie::Tester;
+use Termie::Actions;
 
 our $script-dir is export = $*HOME.child('.termie').child('scripts');
 

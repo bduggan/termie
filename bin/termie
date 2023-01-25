@@ -11,10 +11,10 @@ our $VERSION = v0.2.0;
 use Log::Async;
 use Readline;
 
-use termie::actions;
-use termie::commands;
-use termie::tester;
-use termie::tmux;
+use Termie::Actions;
+use Termie::Commands;
+use Termie::Tester;
+use Termie::Tmux;
 
 sub init(Bool :$do-log = True) {
   set-up-tmux;
@@ -69,7 +69,7 @@ multi MAIN() {
   init;
   say "Welcome to termie v$VERSION";
   my $r = Readline.new;
-  my $cmd = termie::commands.new;
+  my $cmd = Termie::Commands.new;
   $*readline := $r;
   $r.using-history;
   $r.read-history(~$*rl-history-file);
@@ -111,8 +111,8 @@ multi MAIN(
     logger.send-to($*ERR, :level(* >= ERROR));
   }
   init(:!do-log);
-  my $tester = termie::tester.new;
-  my $cmd = termie::commands.new;
+  my $tester = Termie::Tester.new;
+  my $cmd = Termie::Commands.new;
   $cmd.run-script($script, :$tester);
   $tester.complete;
   $tester.report if $report
@@ -132,7 +132,7 @@ multi MAIN('help') {
 
 #| List all the interactive commands
 multi MAIN('commands') {
-  my $cmd = termie::commands.new;
+  my $cmd = Termie::Commands.new;
   for $cmd.generate-help().sort(*.<cmd>) {
     next if .<text> ~~ / ^^ \s* \\ script /;
     say .<text>;

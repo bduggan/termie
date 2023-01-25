@@ -1,6 +1,6 @@
-unit module termie::actions;
+unit module Termie::Actions;
 use Log::Async;
-use termie::tmux;
+use Termie::Tmux;
 
 sub strip-color(Supply $s --> Supply) {
   supply {

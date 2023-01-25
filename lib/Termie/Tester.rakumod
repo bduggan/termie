@@ -1,4 +1,4 @@
-unit class termie::tester;
+unit class Termie::Tester;
 
 has $.count = 0;
 has $.passes = 0;

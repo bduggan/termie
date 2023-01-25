@@ -1,6 +1,6 @@
 use Test;
 
-use termie::commands;
+use Termie::Commands;
 
 my %*vars = earth => 'world';
 
