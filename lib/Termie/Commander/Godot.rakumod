@@ -1,7 +1,7 @@
-unit role termie::commander::godot;
-use termie::utils;
-use termie::tmux;
-use termie::actions;
+unit role Termie::Commander::Godot;
+use Termie::Utils;
+use Termie::Tmux;
+use Termie::Actions;
 
 # handles await-ey things
 

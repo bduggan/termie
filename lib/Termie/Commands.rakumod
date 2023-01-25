@@ -1,13 +1,13 @@
 
-use termie::commander;
+use Termie::Commander;
 
-unit class termie::commands is termie::commander;
+unit class Termie::Commands is Termie::Commander;
 use Log::Async;
-use termie::actions;
-use termie::waiter;
-use termie::tester;
-use termie::tmux;
-use termie::utils;
+use Termie::Actions;
+use Termie::Waiter;
+use Termie::Tester;
+use Termie::Tmux;
+use Termie::Utils;
 
 constant MAX_TMUX_LINE_LENGTH = 200;
 
@@ -194,7 +194,7 @@ method run-meta($meta) is export {
       trace "running $script";
       $script = $script-dir.child($script) unless $script.IO.f;
       $script.IO.f or return note "no such file: $script";
-      my $tester = termie::tester.new;
+      my $tester = Termie::Tester.new;
       trace "running {$script.IO.absolute}";
       self.run-script($script, :$tester);
       $tester.report;
@@ -505,7 +505,7 @@ sub has-content($str) {
 
 method run-script($script, :$tester) is export {
   my @commands = $script.IO.lines.grep({has-content($_)});
-  my $waiter = termie::waiter.new(timeout => +$*timeout);
+  my $waiter = Termie::Waiter.new(timeout => +$*timeout);
   my Channel $captured .= new;
   reorder(@commands);
   my $run-ahead = 0;

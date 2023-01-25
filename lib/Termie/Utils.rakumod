@@ -1,4 +1,4 @@
-unit module termie::utils;
+unit module Termie::Utils;
 
 sub arg($cmd) is export {
   my $wd = $cmd.words[0];

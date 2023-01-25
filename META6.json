@@ -4,15 +4,15 @@
     "raku" : "6.d",
     "build-depends" : [ ],
     "provides" : {
-        "termie::actions" : "lib/termie/actions.rakumod",
-        "termie::commander" : "lib/termie/commander.rakumod",
-        "termie::commands" : "lib/termie/commands.rakumod",
-        "termie::tester" : "lib/termie/tester.rakumod",
-        "termie::tmux" : "lib/termie/tmux.rakumod",
-        "termie::utils" : "lib/termie/utils.rakumod",
-        "termie::waiter" : "lib/termie/waiter.rakumod",
-        "termie::commander::godot" : "lib/termie/commander/godot.rakumod",
-        "termie::commander::shellish" : "lib/termie/commander/shellish.rakumod"
+        "Termie::Actions" : "lib/Termie/Actions.rakumod",
+        "Termie::Commander" : "lib/Termie/Commander.rakumod",
+        "Termie::Commands" : "lib/Termie/Commands.rakumod",
+        "Termie::Tester" : "lib/Termie/Tester.rakumod",
+        "Termie::Tmux" : "lib/Termie/Tmux.rakumod",
+        "Termie::Utils" : "lib/Termie/Utils.rakumod",
+        "Termie::Waiter" : "lib/Termie/Waiter.rakumod",
+        "Termie::Commander::Godot" : "lib/Termie/Commander/Godot.rakumod",
+        "Termie::Commander::Shellish" : "lib/Termie/Commander/Shellish.rakumod"
     },
     "tags" : [
         ],

@@ -1,7 +1,7 @@
 #!/usr/bin/env raku
 
 use lib 'lib';
-use termie::commands;
+use Termie::Commands;
 
 sub to-url(Str $file,Int $line) {
   'https://github.com/bduggan/termie/blob/master/'
@@ -78,7 +78,7 @@ sub show-command($h) {
 
 unit sub MAIN(Bool :$*html, Str :$cmd = '');
 
-my @help = termie::commands.new.generate-help($cmd);
+my @help = Termie::Commands.new.generate-help($cmd);
 
 my %c = @help.classify: { $^line.<text> ~~ / ^^ \s* '\script '/ ?? 'script' !! 'interactive' };
 
