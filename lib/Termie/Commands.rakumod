@@ -218,8 +218,8 @@ method run-meta($meta) is export {
       say $first;
       sendit($first, :!newline);
     }
-    when 'last'|'l' {
-      #= last [n] -- show last n (or 10) commands (see alias)
+    when 'last'|'l'|'history' {
+      #= last (or history) [n] -- show last n (or 10) commands (see alias)
       my $count = arg($meta) || 10;
       my @list = @*history.tail($count);
       @*shown = @list;

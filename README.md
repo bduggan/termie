@@ -191,16 +191,14 @@ Please see the [documentation](https://github.com/bduggan/tmeta/blob/master/doc.
 
 Prerequisites: fzf, tmux, libreadline, raku and a few modules
 
-On OS/X
-```
-brew install fzf
-brew install tmux
-brew install rakudo
-zef install https://github.com/bduggan/termie.git
-```
+1. Install a recent version of Raku.  The recommended way is to use [rakubrew](https://rakubrew.org).
 
-You can also install raku with [rakubrew](https://rakubrew.org)
-and then use `zef` to install termie.
+2. Also install `zef`, the Raku package manager (`rakubrew build-zef`)
+
+3. Install [fzf](https://github.com/junegunn/fzf) and [tmux](https://github.com/tmux/tmux/wiki).
+    (e.g.  `brew install fzf tmuz` on os/x)
+
+4.  zef install https://github.com/bduggan/termie.git
 
 ## See also
 
