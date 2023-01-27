@@ -196,7 +196,7 @@ Prerequisites: fzf, tmux, libreadline, raku and a few modules
 2. Also install `zef`, the Raku package manager (`rakubrew build-zef`)
 
 3. Install [fzf](https://github.com/junegunn/fzf) and [tmux](https://github.com/tmux/tmux/wiki).
-    (e.g.  `brew install fzf tmuz` on os/x)
+    (e.g.  `brew install fzf tmux` on os/x)
 
 4.  zef install https://github.com/bduggan/termie.git
 
