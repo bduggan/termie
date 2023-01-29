@@ -97,12 +97,15 @@ multi MAIN(
   $script,                    #= Name of a script to run
   Bool :t($trace)=False,      #= Run in trace mode
   Bool :d($debug)=False,      #= Run in debug mode
+  Bool :v($verbose)=False,    #= Run in verbose mode
   Bool :$report=False,        #= Print a test report at the end
 ) {
   if $script && not %*ENV<TMUX> {
     exit note "to run a script, start tmux first";
   }
-  if $trace {
+  if $verbose {
+    logger.send-to($*ERR, :level( * >= INFO));
+  } elsif $trace {
     logger.send-to($*ERR, :level( * >= TRACE));
   } elsif $debug {
     logger.send-to($*ERR, :level( * >= DEBUG));

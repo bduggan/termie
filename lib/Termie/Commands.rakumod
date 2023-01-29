@@ -507,7 +507,7 @@ method run-script($script, :$tester) is export {
   my $run-ahead = 0;
   for @commands.kv -> $i, $cmd is copy {
     next unless has-content($cmd);
-    debug "$cmd";
+    info "$cmd";
     note "# --> $cmd" if $*trace eq 'on';
     replace-aliases($cmd);
     replace-vars($cmd);
