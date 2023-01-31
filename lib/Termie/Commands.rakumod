@@ -462,7 +462,7 @@ method run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@comm
       #= script emit -- emit a value matched in a wait regex
       my $newline = True;
       $newline = False if @cmd[2] and @cmd[2] eq '...';
-      note "sending " ~ @cmd[1].raku ~ " from " ~ %*captures.raku;
+      fail "not found: { @cmd[1] }" without %*captures{ @cmd[1] };
       sendit(%*captures{ @cmd[1] }, :$newline);
     }
     default {
@@ -552,7 +552,6 @@ sub replace-aliases($str is rw) is export {
 }
 
 sub replace-vars($str is rw) is export {
-  note "captures are " ~ %*captures.raku;
   $str ~~ s:g/ \\ '=' $<name>=[\w+] /{ %*vars{ "$<name>" } // %*captures{ "$<name>" } // fail "undefined variable '$<name>'" }/;
 }
 
