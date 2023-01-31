@@ -1,0 +1,17 @@
+#!/usr/bin/env termie
+
+# start a docker container, make user, set a password
+
+docker run -it ubuntu:20.04  bash
+\expect root@
+useradd termie
+\expect / 'root@' $<host> = <-[:]>+ ':' /
+passwd termie
+\expect New password:
+fosd3m
+\expect Retype new password:
+fosd3m
+\expect password updated successfully
+exit
+
+echo "the hostname was" \=host

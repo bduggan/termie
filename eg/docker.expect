@@ -1,0 +1,12 @@
+#!/usr/bin/env expect
+
+spawn docker run -it ubuntu:20.04  bash
+expect "root@"
+send "useradd termie\n"
+send "passwd termie\n"
+expect "New password:"
+send "fosd3m\n"
+expect "Retype new password:"
+send "fosd3m\n"
+expect "password updated successfully"
+send "exit\n"
