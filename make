@@ -38,7 +38,8 @@ multi MAIN('docs') {
 
 multi MAIN('bumpdist') {
   shell "zef test .";
-  my $next = qq:x[raku -e '"$version".split(".") >>+>> <0 0 1> ==> join(".") ==> say()'].trim;
+  #my $next = qq:x[raku -e '"$version".split(".") >>+>> <0 0 1> ==> join(".") ==> say()'].trim;
+  my $next = "0.2.1";
   say "$version -> $next";
   exit note "no next version" unless $next;
   shell qq:to/SH/;

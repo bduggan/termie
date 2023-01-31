@@ -1,3 +1,16 @@
+0.2.1 2023-01-31
+
+    - fail when missing captures
+    - more examples
+    - refactor captures
+    - simpler tail
+    - add verbose flag
+    - add history as an alias for last
+    - Remove unused option
+    - fix tests
+    - Capitalize module names
+    - allow an argument to watch
+
 0.2.0 2023-01-23
 
       - First release as termie
