@@ -32,16 +32,22 @@ sub wait_for(Str $what, Channel $captured, Supply :$from --> Promise) is export 
         }
       }
       trace "buffer is " ~ $buffer.raku;
-      if $target ~~ Str and $buffer.contains($target) {
-        debug "contains match: for {$what.raku}: {$buffer.raku}";
-        done;
-      }
-      if $buffer and $buffer ~~ $target {
-        debug "match: for {$what.raku}: {$buffer.raku}";
-        my $m = $/.clone;
-        trace "captured " ~ ( $m.gist.subst(/\n/,',',:g) );
-        $captured.send: $m;
-        done;
+      given $target {
+        when Str {
+          if $buffer.contains($target) {
+            debug "contains match: for {$what.raku}: {$buffer.raku}";
+            done;
+          }
+        }
+        when Regex {
+          if $buffer ~~ $target {
+            debug "match: for {$what.raku}: {$buffer.raku}";
+            my $m = $/.clone;
+            trace "captured " ~ ( $m.gist.subst(/\n/,',',:g) );
+            $captured.send: $m;
+            done;
+          }
+        }
       }
       trace "no match { $buffer.gist } vs { $target.gist }";
       LAST { tmux-stop-pipe }

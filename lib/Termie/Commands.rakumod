@@ -387,18 +387,6 @@ sub confirm-send($str, Bool :$big, Bool :$add-to-history = False) {
   }
 }
 
-sub send-capture($key, Channel $captured, :$newline) {
-  debug "ready to send $key";
-  my $msg;
-  loop {
-    debug "waiting for $key";
-    $msg = $captured.receive;
-    last if $msg{$key}:exists;
-  }
-  debug "got " ~ $msg{$key};
-  sendit( ~$msg{$key}, :$newline );
-}
-
 method run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@commands, :$i) {
   my @cmd = $cmd.words;
   given @cmd[0] {
@@ -474,7 +462,8 @@ method run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@comm
       #= script emit -- emit a value matched in a wait regex
       my $newline = True;
       $newline = False if @cmd[2] and @cmd[2] eq '...';
-      send-capture(@cmd[1], $captured, :$newline);
+      note "sending " ~ @cmd[1].raku ~ " from " ~ %*captures.raku;
+      sendit(%*captures{ @cmd[1] }, :$newline);
     }
     default {
       self.run-meta($cmd);
@@ -503,6 +492,14 @@ method run-script($script, :$tester) is export {
   my @commands = $script.IO.lines.grep({has-content($_)});
   my $waiter = Termie::Waiter.new(timeout => +$*timeout);
   my Channel $captured .= new;
+  my %*captures;
+  start {
+    my $got = $captured.receive;
+    my %h = $got.Hash;
+    trace "received a capture: " ~ %h.gist;
+    %*captures{ "$_" } = ~%h{ $_ } for %h.keys;
+    trace "captures are " ~ %*captures.raku;
+  }
   reorder(@commands);
   my $run-ahead = 0;
   for @commands.kv -> $i, $cmd is copy {
@@ -555,6 +552,7 @@ sub replace-aliases($str is rw) is export {
 }
 
 sub replace-vars($str is rw) is export {
-  $str ~~ s:g/ \\ '=' $<name>=[\w+] /{ %*vars{ "$<name>" } // fail "undefined variable '$<name>'" }/;
+  note "captures are " ~ %*captures.raku;
+  $str ~~ s:g/ \\ '=' $<name>=[\w+] /{ %*vars{ "$<name>" } // %*captures{ "$<name>" } // fail "undefined variable '$<name>'" }/;
 }
 
