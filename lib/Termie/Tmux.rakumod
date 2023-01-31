@@ -49,13 +49,9 @@ sub tail($file --> Supply) is export {
   supply {
     my $in = $file.IO.open;
     $in.seek(0, SeekFromEnd);
-    my $start = $in.read.decode;
-    my $last = $in.tell;
     whenever $file.IO.watch -> $e {
       trace "got event $e";
-      $in.seek($last) if $last;
       emit $in.read.decode;
-      $last = $in.tell;
     }
   }
 }
