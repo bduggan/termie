@@ -3,6 +3,8 @@
 spawn docker run -it ubuntu:20.04  bash
 expect "root@"
 send "useradd termie\n"
+expect -re "root@(.*):"
+set host $expect_out(1,string)
 send "passwd termie\n"
 expect "New password:"
 send "fosd3m\n"
@@ -10,3 +12,4 @@ expect "Retype new password:"
 send "fosd3m\n"
 expect "password updated successfully"
 send "exit\n"
+puts "host name is $host"
