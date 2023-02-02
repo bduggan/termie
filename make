@@ -42,7 +42,7 @@ multi MAIN('bumpdist') {
   say "$version -> $next";
   exit note "no next version" unless $next;
   shell qq:to/SH/;
-    perl -p -i -e "s/{$version}/{$next}/" META6.json
+    perl -p -i -e "s/{$version}/{$next}/" META6.json bin/termie
     SH
   update-changes($version,$next);  
   shell "git commit -am$next";
