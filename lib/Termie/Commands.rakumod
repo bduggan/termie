@@ -353,6 +353,17 @@ method run-meta($meta) is export {
       #= sleep X -- sleep for X seconds
       sleep arg($meta) // 1
     }
+    when 'exec' {
+      #= script exec <script-name> -- execute a program, and send output from the current pane to the program's stdin, and wait for the program to exit
+      my $script-name = arg($meta) or fail "missing script name for exec";
+      debug "executing $script-name";
+      my $proc = Proc::Async.new("$script-name", :w);
+      my ($window,$pane,$buffer) = ($*window,$*pane,$*buffer);
+      start react whenever output-stream(:$window,:$pane,:$buffer) {
+        $proc.print: $_
+      }
+      await $proc.start;
+    }
     default {
       say "unknown command $_";
     }
@@ -464,17 +475,6 @@ method run-script-command($cmd, :$waiter, :$tester, :$script, :$captured, :@comm
       $newline = False if @cmd[2] and @cmd[2] eq '...';
       fail "not found: { @cmd[1] }" without %*captures{ @cmd[1] };
       sendit(%*captures{ @cmd[1] }, :$newline);
-    }
-    when 'exec' {
-      #= script exec <script-name> -- execute a program, and send output from the current pane to the program's stdin, and wait for the program to exit
-      my $script-name = @cmd[1] or fail "missing script name for exec";
-      debug "executing $script-name";
-      my $proc = Proc::Async.new("$script-name", :w);
-      my ($window,$pane,$buffer) = ($*window,$*pane,$*buffer);
-      start react whenever output-stream(:$window,:$pane,:$buffer) {
-        $proc.print: $_
-      }
-      await $proc.start;
     }
     default {
       self.run-meta($cmd);
