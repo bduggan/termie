@@ -16,7 +16,7 @@ In interactive mode these commands are supported:
      \clr                            send a clear screen char
      \debug                          set log level to debug
      \delay [num]                    set the delay between sending lines
-     \do                             run a (not-shell) command and send the output slowly
+     \do                             run a (not-shell) command and send the output slowly to the current pane
      \dosh                           run a shell command and send the output (text mode, line at a time)
      \dump <n>                       dump n (or 3000) lines of output to a file
      \edit                           edit a file (default /tmp/buffer)
@@ -27,7 +27,7 @@ In interactive mode these commands are supported:
      \grep                           grep for a phrase in the output
      \help                           this help
      \info                           set log level to info
-     \last [n]                       show last n (or 10) commands (see alias)
+     \last (or history) [n]          show last n (or 10) commands (see alias)
      \ls <opts>                      run ls in this pane
      \n                              run command in item number n
      \newlines [on|off]              turn on or off always sending a newline
@@ -49,7 +49,7 @@ In interactive mode these commands are supported:
      \trace                          set log level to trace
      \uni <text>                     Look up unicode character to output
      \unwatch                        stop watching the current window+pane
-     \watch                          start watching the current window+pane by piping to a file
+     \watch [filename]               start watching the current window+pane by piping to a file
      \xfer [filename]                send a file or directory to the remote console
 ```
 ### Scripts
@@ -58,9 +58,9 @@ In scripting mode, these additional commands are supported:
 
 ```
      \buffer [lines|none]     turn on line buffering
-     \color [on|off]          turn off color (i.e. filter out ansi escapes)
      \done                    indicate that the script is done
      \emit                    emit a value matched in a wait regex
+     \exec <script-name>      execute a program, and send output from the current pane to the program's stdin, and wait for the program to exit
      \pause <msg>             show msg or 'press return to continue'
      \run <name>              run another script in the same directory
      \send                    send a file, abort if it cannot be sent.
