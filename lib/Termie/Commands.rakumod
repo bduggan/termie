@@ -259,6 +259,7 @@ method run-meta($meta) is export {
       #= do -- run a (not-shell) command and send the output slowly to the current pane
       my @prog = $meta.words[1..*];
       say "running { @prog.join(' ') }";
+      my $delay = $*delay;
       try {
         my $proc = Proc::Async.new(|@prog);
         my $out = $proc.stdout.lines;
@@ -266,9 +267,9 @@ method run-meta($meta) is export {
         my $pane = $*pane;
         my $window = $*window;
         react whenever $out -> $str {
-          say "sending $str";
+          debug "sending $str";
           sendit($str, newline => True, :nostore, :$pane, :$window);
-          sleep 1;
+          sleep $delay;
         }
         await $p;
       }
