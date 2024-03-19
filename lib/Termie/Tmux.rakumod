@@ -121,6 +121,7 @@ sub sendit($str,
     } else {
       run <<tmux send-keys -t "$window.$pane" -l "$send">>;
     }
+    sleep 0.1 if $newline;
     run <<tmux send-keys -t "$window.$pane" enter>> if $newline;
   }
 }
