@@ -202,6 +202,7 @@ method run-meta($meta) is export {
     when 'find' {
       #= find <phrase> -- Find commands in the history.
       my $what = arg($meta);
+      fail "please install fzf" unless qx[which fzf].trim.IO.e;
       my $proc = run <<fzf --bind 'j:down,k:up' -e --no-sort --layout=reverse -q "$what">>, :in, :out;
       $proc.in.put($_) for $*log-file.IO.slurp.lines.reverse.unique;
       my $send = $proc.out.get or return;
