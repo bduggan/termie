@@ -50,20 +50,9 @@ sub update-changes($version, $next) {
 }
 
 multi MAIN('docs') {
-  "README.md".IO.spurt: $badges ~ "\n";
-  shell qq:to/SH/;
-    raku -Ilib --doc=Markdown $readme-src >> README.md
+  shell q:to/SH/;
+    ./gen-docs --html > doc.md
     SH
-  #sub recurse($dir) {
-  #  recurse($_) for dir($dir, test => { $dir.IO.child($_).d && !.starts-with('.') });
-  # for dir($dir, test => { /\.rakumod$/ }) -> $f {
-  #   my $path = $f.IO.relative($*PROGRAM.parent);
-  #   my $out = 'docs'.IO.child: $path.subst(/\.rakumod$/, '.md');
-  #   $out.dirname.IO.d or mkdir $out.dirname;
-  #   shell qq:x[raku -Ilib --doc=Markdown $f > $out];
-  # }
-  #
-  #recurse('lib');
 }
 
 multi MAIN('bumpdist') {
